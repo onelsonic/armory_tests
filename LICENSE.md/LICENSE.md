@@ -1,4 +1,4 @@
-CC Onelsonic
+CC by Onelsonic
 
 Attribution 4.0 International
 
