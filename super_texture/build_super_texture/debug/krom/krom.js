@@ -3523,6 +3523,7 @@ iron_Scene.prototype = {
 		done(object);
 	}
 	,loadEmbeddedData: function(datas,done) {
+		var _gthis = this;
 		if(datas == null) {
 			done();
 			return;
@@ -3530,41 +3531,42 @@ iron_Scene.prototype = {
 		var loaded = 0;
 		var _g = 0;
 		while(_g < datas.length) {
-			var file = datas[_g];
+			var file = [datas[_g]];
 			++_g;
-			this.embedData(file,function() {
-				loaded += 1;
-				if(loaded == datas.length) {
-					done();
-				}
-			});
-		}
-	}
-	,embedData: function(file,done) {
-		var _gthis = this;
-		if(StringTools.endsWith(file,".raw")) {
-			iron_data_Data.getBlob(file,function(blob) {
-				var b = blob.toBytes();
-				var w = (Math.pow(b.length,0.33333333333333331) | 0) + 1;
-				var image = kha_Image.fromBytes3D(b,w,w,w,1);
-				var _this = _gthis.embedded;
-				if(__map_reserved[file] != null) {
-					_this.setReserved(file,image);
-				} else {
-					_this.h[file] = image;
-				}
-				done();
-			});
-		} else {
-			iron_data_Data.getImage(file,function(image1) {
-				var _this1 = _gthis.embedded;
-				if(__map_reserved[file] != null) {
-					_this1.setReserved(file,image1);
-				} else {
-					_this1.h[file] = image1;
-				}
-				done();
-			});
+			if(StringTools.endsWith(file[0],".raw")) {
+				iron_data_Data.getBlob(file[0],(function(file1) {
+					return function(blob) {
+						var b = blob.toBytes();
+						var w = (Math.pow(b.length,0.33333333333333331) | 0) + 1;
+						var image = kha_Image.fromBytes3D(b,w,w,w,1);
+						var _this = _gthis.embedded;
+						if(__map_reserved[file1[0]] != null) {
+							_this.setReserved(file1[0],image);
+						} else {
+							_this.h[file1[0]] = image;
+						}
+						loaded += 1;
+						if(loaded == datas.length) {
+							done();
+						}
+					};
+				})(file));
+			} else {
+				iron_data_Data.getImage(file[0],(function(file2) {
+					return function(image1) {
+						var _this1 = _gthis.embedded;
+						if(__map_reserved[file2[0]] != null) {
+							_this1.setReserved(file2[0],image1);
+						} else {
+							_this1.h[file2[0]] = image1;
+						}
+						loaded += 1;
+						if(loaded == datas.length) {
+							done();
+						}
+					};
+				})(file));
+			}
 		}
 	}
 	,notifyOnInit: function(f) {
@@ -7802,7 +7804,6 @@ var iron_object_Animation = function() {
 	this.blendAction = "";
 	this.blendCurrent = 0.0;
 	this.blendTime = 0.0;
-	this.frameTime = 0.016666666666666666;
 	this.paused = false;
 	this.onComplete = null;
 	this.frameIndex = 0;
@@ -7811,9 +7812,7 @@ var iron_object_Animation = function() {
 	this.time = 0.0;
 	this.action = "";
 	iron_Scene.active.animations.push(this);
-	if(iron_Scene.active.raw.frame_time != null) {
-		this.frameTime = iron_Scene.active.raw.frame_time;
-	}
+	this.frameTime = iron_Scene.active.raw.frame_time;
 	this.play();
 };
 $hxClasses["iron.object.Animation"] = iron_object_Animation;
@@ -13182,15 +13181,9 @@ var iron_object_ParticleSystem = function(sceneName,pref) {
 	iron_data_Data.getParticle(sceneName,pref.particle,function(b) {
 		_gthis.data = b;
 		_gthis.r = _gthis.data.raw;
-		if(iron_Scene.active.raw.gravity != null) {
-			_gthis.gx = iron_Scene.active.raw.gravity[0] * _gthis.r.weight_gravity;
-			_gthis.gy = iron_Scene.active.raw.gravity[1] * _gthis.r.weight_gravity;
-			_gthis.gz = iron_Scene.active.raw.gravity[2] * _gthis.r.weight_gravity;
-		} else {
-			_gthis.gx = 0;
-			_gthis.gy = 0;
-			_gthis.gz = -9.81 * _gthis.r.weight_gravity;
-		}
+		_gthis.gx = iron_Scene.active.raw.gravity[0] * _gthis.r.weight_gravity;
+		_gthis.gy = iron_Scene.active.raw.gravity[1] * _gthis.r.weight_gravity;
+		_gthis.gz = iron_Scene.active.raw.gravity[2] * _gthis.r.weight_gravity;
 		_gthis.alignx = _gthis.r.object_align_factor[0] / 2;
 		_gthis.aligny = _gthis.r.object_align_factor[1] / 2;
 		_gthis.alignz = _gthis.r.object_align_factor[2] / 2;
@@ -14679,8 +14672,7 @@ iron_object_Uniforms.bindRenderTarget = function(g,rt,context,samplerID,attachDe
 					var allowParams = oc == null || oc.shared_sampler == null || oc.shared_sampler == samplerID;
 					if(allowParams) {
 						var addressing = oc != null && oc.addressing == "repeat" ? 0 : 2;
-						var filter = oc != null && oc.filter == "point" ? 0 : iron_object_Uniforms.defaultFilter;
-						g.setTextureParameters(context.textureUnits[j],addressing,addressing,filter,filter,0);
+						g.setTextureParameters(context.textureUnits[j],addressing,addressing,1,1,0);
 					}
 					paramsSet = true;
 				}
@@ -17617,7 +17609,7 @@ iron_system_ArmPack.write = function(o,d) {
 			o.writeByte(221);
 			o.writeInt32(d.length);
 			var isInt16 = ((d) instanceof Int16Array);
-			var isInt = js_Boot.__instanceof(d[0],Int) && !((d) instanceof Float32Array);
+			var isInt = js_Boot.__instanceof(d[0],Int);
 			var isFloat = typeof(d[0]) == "number";
 			if(isInt16) {
 				o.writeByte(209);
@@ -17657,7 +17649,7 @@ iron_system_ArmPack.write = function(o,d) {
 				o.writeByte(221);
 				o.writeInt32(d.length);
 				var isInt161 = ((d) instanceof Int16Array);
-				var isInt1 = js_Boot.__instanceof(d[0],Int) && !((d) instanceof Float32Array);
+				var isInt1 = js_Boot.__instanceof(d[0],Int);
 				var isFloat1 = typeof(d[0]) == "number";
 				if(isInt161) {
 					o.writeByte(209);
@@ -19916,7 +19908,23 @@ var kha_KravurImage = function(size,ascent,descent,lineGap,width,height,chars,pi
 		++_g;
 		char.yoff += this.baseline;
 	}
-	this.texture = kha_Image.fromBytes(pixels.toBytes(),width,height,1);
+	this.texture = kha_Image.create(width,height,1);
+	var bytes = this.texture.lock();
+	var pos = 0;
+	var _g1 = 0;
+	var _g2 = height;
+	while(_g1 < _g2) {
+		var y = _g1++;
+		var _g11 = 0;
+		var _g21 = width;
+		while(_g11 < _g21) {
+			var x = _g11++;
+			var v = pixels.readU8(pos);
+			bytes.b[pos] = v;
+			++pos;
+		}
+	}
+	this.texture.unlock();
 };
 $hxClasses["kha.KravurImage"] = kha_KravurImage;
 kha_KravurImage.__name__ = "kha.KravurImage";
@@ -20712,7 +20720,6 @@ kha_Shaders.init = function() {
 	kha_Shaders.painter_video_vert = new kha_graphics4_VertexShader(blobs11,["painter-video.vert.d3d11"]);
 };
 var kha_Sound = function() {
-	this.sampleRate = 0;
 	this.channels = 0;
 	this.length = 0;
 };
@@ -20724,7 +20731,6 @@ kha_Sound.prototype = {
 	,uncompressedData: null
 	,length: null
 	,channels: null
-	,sampleRate: null
 	,uncompress: function(done) {
 		if(this.uncompressedData != null) {
 			done();
@@ -20757,7 +20763,6 @@ kha_Sound.prototype = {
 			}
 		}
 		this.channels = header.channel;
-		this.sampleRate = header.sampleRate;
 		this.compressedData = null;
 		done();
 	}
@@ -21571,7 +21576,6 @@ kha_audio2_Audio.__name__ = "kha.audio2.Audio";
 kha_audio2_Audio._init = function() {
 	var bufferSize = 2048;
 	kha_audio2_Audio.buffer = new kha_audio2_Buffer(bufferSize * 4,2,44100);
-	kha_audio2_Audio.samplesPerSecond = 44100;
 };
 kha_audio2_Audio._callCallback = function(samples) {
 	if(kha_audio2_Audio.buffer == null) {
@@ -21719,12 +21723,7 @@ kha_audio2_Audio1.play = function(sound,loop) {
 	if(loop == null) {
 		loop = false;
 	}
-	var channel = null;
-	if(kha_audio2_Audio.samplesPerSecond != sound.sampleRate) {
-		channel = new kha_audio2_ResamplingAudioChannel(loop,sound.sampleRate);
-	} else {
-		channel = new kha_audio2_AudioChannel(loop);
-	}
+	var channel = new kha_audio2_AudioChannel(loop);
 	channel.data = sound.uncompressedData;
 	var foundChannel = false;
 	var _g = 0;
@@ -21907,193 +21906,6 @@ kha_audio2_Buffer.prototype = {
 	,writeLocation: null
 	,__class__: kha_audio2_Buffer
 };
-var kha_audio2_ResamplingAudioChannel = function(looping,sampleRate) {
-	kha_audio2_AudioChannel.call(this,looping);
-	this.sampleRate = sampleRate;
-};
-$hxClasses["kha.audio2.ResamplingAudioChannel"] = kha_audio2_ResamplingAudioChannel;
-kha_audio2_ResamplingAudioChannel.__name__ = "kha.audio2.ResamplingAudioChannel";
-kha_audio2_ResamplingAudioChannel.max = function(a,b) {
-	if(a > b) {
-		return a;
-	} else {
-		return b;
-	}
-};
-kha_audio2_ResamplingAudioChannel.min = function(a,b) {
-	if(a < b) {
-		return a;
-	} else {
-		return b;
-	}
-};
-kha_audio2_ResamplingAudioChannel.__super__ = kha_audio2_AudioChannel;
-kha_audio2_ResamplingAudioChannel.prototype = $extend(kha_audio2_AudioChannel.prototype,{
-	sampleRate: null
-	,nextSamples: function(requestedSamples,requestedLength,sampleRate) {
-		if(this.paused || this.stopped) {
-			var _g = 0;
-			var _g1 = requestedLength;
-			while(_g < _g1) {
-				var i = _g++;
-				requestedSamples[i] = 0;
-			}
-			return;
-		}
-		var requestedSamplesIndex = 0;
-		while(requestedSamplesIndex < requestedLength) {
-			var _g2 = 0;
-			var value = Math.ceil(this.data.length * (sampleRate / this.sampleRate));
-			var a = (value % 2 == 0 ? value : value + 1) - this.myPosition;
-			var b = requestedLength - requestedSamplesIndex;
-			var _g11 = a < b ? a : b;
-			while(_g2 < _g11) {
-				var i1 = _g2++;
-				var index = requestedSamplesIndex++;
-				var position = this.myPosition++;
-				var even = position % 2 == 0;
-				var factor = this.sampleRate / sampleRate;
-				var value1;
-				if(even) {
-					position = position / 2 | 0;
-					var pos = factor * position;
-					var pos1 = Math.floor(pos);
-					var pos2 = Math.floor(pos + 1);
-					pos1 *= 2;
-					pos2 *= 2;
-					var minimum = 0;
-					var maximum = this.data.length - 1;
-					if(maximum % 2 == 0) {
-						maximum = maximum;
-					} else {
-						--maximum;
-					}
-					var a1 = pos1 < minimum || pos1 > maximum ? 0 : this.data[pos1];
-					var b1 = pos2 < minimum || pos2 > maximum ? 0 : this.data[pos2];
-					var t = pos - Math.floor(pos);
-					value1 = (1 - t) * a1 + t * b1;
-				} else {
-					position = position / 2 | 0;
-					var pos3 = factor * position;
-					var pos11 = Math.floor(pos3);
-					var pos21 = Math.floor(pos3 + 1);
-					pos11 = pos11 * 2 + 1;
-					pos21 = pos21 * 2 + 1;
-					var minimum1 = 1;
-					var maximum1 = this.data.length - 1;
-					if(maximum1 % 2 != 0) {
-						maximum1 = maximum1;
-					} else {
-						--maximum1;
-					}
-					var a2 = pos11 < minimum1 || pos11 > maximum1 ? 0 : this.data[pos11];
-					var b2 = pos21 < minimum1 || pos21 > maximum1 ? 0 : this.data[pos21];
-					var t1 = pos3 - Math.floor(pos3);
-					value1 = (1 - t1) * a2 + t1 * b2;
-				}
-				requestedSamples[index] = value1;
-			}
-			var value2 = Math.ceil(this.data.length * (sampleRate / this.sampleRate));
-			if(this.myPosition >= (value2 % 2 == 0 ? value2 : value2 + 1)) {
-				this.myPosition = 0;
-				if(!this.looping) {
-					this.stopped = true;
-					break;
-				}
-			}
-		}
-		while(requestedSamplesIndex < requestedLength) requestedSamples[requestedSamplesIndex++] = 0;
-	}
-	,sample: function(position,sampleRate) {
-		var even = position % 2 == 0;
-		var factor = this.sampleRate / sampleRate;
-		if(even) {
-			position = position / 2 | 0;
-			var pos = factor * position;
-			var pos1 = Math.floor(pos);
-			var pos2 = Math.floor(pos + 1);
-			pos1 *= 2;
-			pos2 *= 2;
-			var minimum = 0;
-			var maximum = this.data.length - 1;
-			if(maximum % 2 == 0) {
-				maximum = maximum;
-			} else {
-				--maximum;
-			}
-			var a = pos1 < minimum || pos1 > maximum ? 0 : this.data[pos1];
-			var b = pos2 < minimum || pos2 > maximum ? 0 : this.data[pos2];
-			var t = pos - Math.floor(pos);
-			return (1 - t) * a + t * b;
-		} else {
-			position = position / 2 | 0;
-			var pos3 = factor * position;
-			var pos11 = Math.floor(pos3);
-			var pos21 = Math.floor(pos3 + 1);
-			pos11 = pos11 * 2 + 1;
-			pos21 = pos21 * 2 + 1;
-			var minimum1 = 1;
-			var maximum1 = this.data.length - 1;
-			if(maximum1 % 2 != 0) {
-				maximum1 = maximum1;
-			} else {
-				--maximum1;
-			}
-			var a1 = pos11 < minimum1 || pos11 > maximum1 ? 0 : this.data[pos11];
-			var b1 = pos21 < minimum1 || pos21 > maximum1 ? 0 : this.data[pos21];
-			var t1 = pos3 - Math.floor(pos3);
-			return (1 - t1) * a1 + t1 * b1;
-		}
-	}
-	,lerp: function(v0,v1,t) {
-		return (1 - t) * v0 + t * v1;
-	}
-	,sampleLength: function(sampleRate) {
-		var value = Math.ceil(this.data.length * (sampleRate / this.sampleRate));
-		if(value % 2 == 0) {
-			return value;
-		} else {
-			return value + 1;
-		}
-	}
-	,play: function() {
-		this.paused = false;
-		this.stopped = false;
-		kha_audio2_Audio1._playAgain(this);
-	}
-	,pause: function() {
-		this.paused = true;
-	}
-	,stop: function() {
-		this.myPosition = 0;
-		this.stopped = true;
-	}
-	,get_length: function() {
-		return this.data.length / this.sampleRate / 2;
-	}
-	,get_position: function() {
-		return this.myPosition / this.sampleRate / 2;
-	}
-	,set_position: function(value) {
-		this.myPosition = Math.round(value * this.sampleRate * 2);
-		var a = this.myPosition;
-		var value1 = Math.ceil(this.data.length * (kha_audio2_Audio.samplesPerSecond / this.sampleRate));
-		var b = value1 % 2 == 0 ? value1 : value1 + 1;
-		var a1 = a < b ? a : b;
-		this.myPosition = a1 > 0 ? a1 : 0;
-		return value;
-	}
-	,get_volume: function() {
-		return this.myVolume;
-	}
-	,set_volume: function(value) {
-		return this.myVolume = value;
-	}
-	,get_finished: function() {
-		return this.stopped;
-	}
-	,__class__: kha_audio2_ResamplingAudioChannel
-});
 var kha_audio2_StreamChannel = function(data,loop) {
 	this.paused = false;
 	this.atend = false;
@@ -33560,7 +33372,6 @@ kha_krom_Graphics.prototype = {
 };
 var kha_krom_Sound = function(bytes) {
 	kha_Sound.call(this);
-	this.sampleRate = 44100;
 	var count = bytes.length / 4 | 0;
 	var this1 = new Float32Array(count);
 	this.uncompressedData = this1;
@@ -34459,7 +34270,6 @@ iron_object_Uniforms.helpMat3 = new iron_math_Mat3(1,0,0,0,1,0,0,0,1);
 iron_object_Uniforms.helpVec = new iron_math_Vec4();
 iron_object_Uniforms.helpVec2 = new iron_math_Vec4();
 iron_object_Uniforms.helpQuat = new iron_math_Quat();
-iron_object_Uniforms.defaultFilter = 1;
 iron_system_Input.occupied = false;
 iron_system_Input.gamepads = [];
 iron_system_Input.registered = false;
