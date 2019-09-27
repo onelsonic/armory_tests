@@ -1,0 +1,14 @@
+principled BSDF
+
+Base Color	:	is ok or not ?
+Roughness	:	is ok or not ?
+Specular	:	is ok or not ?
+NormalMap	:	is ok or not ?
+
+
+Armory PBR
+
+Base Color	:	is ok or not ?
+Roughness	:	is ok or not ?
+Specular	:	is ok or not ?
+NormalMap	:	is ok or not ?
