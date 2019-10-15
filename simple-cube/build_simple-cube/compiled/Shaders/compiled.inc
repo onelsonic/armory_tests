@@ -1,6 +1,5 @@
 #ifndef _COMPILED_GLSL_
 #define _COMPILED_GLSL_
-#define _Irr
 #define _EnvCol
 #define _LDR
 #define _ShadowMap

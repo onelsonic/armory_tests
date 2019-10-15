@@ -3,7 +3,6 @@
 #include "std/math.glsl"
 #include "std/brdf.glsl"
 #include "std/shadows.glsl"
-#include "std/shirr.glsl"
 in vec3 wnormal;
 in vec3 wposition;
 out vec4 fragColor;
@@ -37,6 +36,6 @@ vec3 n = normalize(wnormal);
 	#endif
 	visibility = texture(shadowMapPoint[0], vec4(-l + n * pointBias * 20, compare)).r;
 	direct += basecol * dotNL * pointCol * attenuate(distance(wposition, pointPos)) * visibility;
-	fragColor = vec4(direct + basecol * shIrradiance(n) * envmapStrength, 1.0);
+	fragColor = vec4(direct + basecol * 0.5 * envmapStrength, 1.0);
 	fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / 2.2));
 }

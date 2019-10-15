@@ -24,10 +24,6 @@
 			],
 			"uniforms": [
 				{
-					"name": "shirr",
-					"type": "vec4[]"
-				},
-				{
 					"name": "pointPos",
 					"type": "vec3"
 				},

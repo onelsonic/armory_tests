@@ -2,7 +2,6 @@
 precision mediump float;
 precision highp int;
 
-uniform highp vec4 shirr[7];
 uniform highp vec3 pointPos;
 uniform highp vec2 lightProj;
 uniform highp float pointBias;
@@ -27,20 +26,6 @@ highp float attenuate(highp float dist)
     return 1.0 / (dist * dist);
 }
 
-highp vec3 shIrradiance(highp vec3 nor)
-{
-    highp vec3 cl00 = vec3(shirr[0].x, shirr[0].y, shirr[0].z);
-    highp vec3 cl1m1 = vec3(shirr[0].w, shirr[1].x, shirr[1].y);
-    highp vec3 cl10 = vec3(shirr[1].z, shirr[1].w, shirr[2].x);
-    highp vec3 cl11 = vec3(shirr[2].y, shirr[2].z, shirr[2].w);
-    highp vec3 cl2m2 = vec3(shirr[3].x, shirr[3].y, shirr[3].z);
-    highp vec3 cl2m1 = vec3(shirr[3].w, shirr[4].x, shirr[4].y);
-    highp vec3 cl20 = vec3(shirr[4].z, shirr[4].w, shirr[5].x);
-    highp vec3 cl21 = vec3(shirr[5].y, shirr[5].z, shirr[5].w);
-    highp vec3 cl22 = vec3(shirr[6].x, shirr[6].y, shirr[6].z);
-    return ((((((((((cl22 * 0.429042994976043701171875) * ((nor.y * nor.y) - ((-nor.z) * (-nor.z)))) + (((cl20 * 0.743125021457672119140625) * nor.x) * nor.x)) + (cl00 * 0.88622701168060302734375)) - (cl20 * 0.2477079927921295166015625)) + (((cl2m2 * 0.85808598995208740234375) * nor.y) * (-nor.z))) + (((cl21 * 0.85808598995208740234375) * nor.y) * nor.x)) + (((cl2m1 * 0.85808598995208740234375) * (-nor.z)) * nor.x)) + ((cl11 * 1.02332794666290283203125) * nor.y)) + ((cl1m1 * 1.02332794666290283203125) * (-nor.z))) + ((cl10 * 1.02332794666290283203125) * nor.x);
-}
-
 void main()
 {
     highp vec3 n = normalize(wnormal);
@@ -55,13 +40,13 @@ void main()
     highp vec3 l = normalize(ld);
     highp float dotNL = max(dot(n, l), 0.0);
     highp vec3 param = ld;
-    highp float _252 = lpToDepth(param, lightProj);
-    highp float compare = _252 - (pointBias * 1.5);
-    highp vec4 _278 = vec4((-l) + ((n * pointBias) * 20.0), compare);
-    visibility = texture(shadowMapPoint[0], vec4(_278.xyz, _278.w));
+    highp float _89 = lpToDepth(param, lightProj);
+    highp float compare = _89 - (pointBias * 1.5);
+    highp vec4 _119 = vec4((-l) + ((n * pointBias) * 20.0), compare);
+    visibility = texture(shadowMapPoint[0], vec4(_119.xyz, _119.w));
     direct += ((((basecol * dotNL) * pointCol) * attenuate(distance(wposition, pointPos))) * visibility);
-    fragColor = vec4(direct + ((basecol * shIrradiance(n)) * envmapStrength), 1.0);
-    highp vec3 _315 = pow(fragColor.xyz, vec3(0.4545454680919647216796875));
-    fragColor = vec4(_315.x, _315.y, _315.z, fragColor.w);
+    fragColor = vec4(direct + ((basecol * 0.5) * envmapStrength), 1.0);
+    highp vec3 _154 = pow(fragColor.xyz, vec3(0.4545454680919647216796875));
+    fragColor = vec4(_154.x, _154.y, _154.z, fragColor.w);
 }
 
