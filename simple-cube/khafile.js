@@ -8,6 +8,7 @@ project.addParameter('-dce full');
 project.addShaders("build_simple-cube/compiled/Shaders/*.glsl", { noembed: false});
 project.addAssets("build_simple-cube/compiled/Assets/**", { notinlist: true });
 project.addAssets("build_simple-cube/compiled/Shaders/*.arm", { notinlist: true });
+project.addDefine('arm_legacy');
 project.addDefine('rp_renderer=Forward');
 project.addDefine('rp_shadowmap');
 project.addDefine('rp_shadowmap_cascade=1024');
@@ -24,7 +25,7 @@ project.addDefine('arm_soundcompress');
 project.addDefine('arm_skin');
 project.addDefine('arm_particles');
 project.addDefine('arm_loadscreen');
-project.addDefine('arm_resizable');
+project.targetOptions.ios.bundle = 'org.armory3d.arm';
 
 
 resolve(project);

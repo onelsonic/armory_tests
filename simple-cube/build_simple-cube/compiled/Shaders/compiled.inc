@@ -3,6 +3,7 @@
 #define _EnvCol
 #define _LDR
 #define _ShadowMap
+#define _Legacy
 #define _SinglePoint
 const float PI = 3.1415926535;
 const float PI2 = PI * 2.0;

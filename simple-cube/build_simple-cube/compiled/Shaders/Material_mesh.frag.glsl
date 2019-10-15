@@ -10,7 +10,7 @@ uniform vec3 pointPos;
 uniform vec3 pointCol;
 uniform float pointBias;
 uniform vec2 lightProj;
-uniform samplerCubeShadow shadowMapPoint[1];
+uniform samplerCube shadowMapPoint[1];
 uniform float envmapStrength;
 void main() {
 vec3 n = normalize(wnormal);
@@ -34,7 +34,7 @@ vec3 n = normalize(wnormal);
 	#ifdef HLSL
 	l.y = -l.y;
 	#endif
-	visibility = texture(shadowMapPoint[0], vec4(-l + n * pointBias * 20, compare)).r;
+	visibility = float(texture(shadowMapPoint[0], vec3(-l + n * pointBias * 20)).r > compare);
 	direct += basecol * dotNL * pointCol * attenuate(distance(wposition, pointPos)) * visibility;
 	fragColor = vec4(direct + basecol * 0.5 * envmapStrength, 1.0);
 	fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / 2.2));
