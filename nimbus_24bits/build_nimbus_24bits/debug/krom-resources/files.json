@@ -1,66 +1,6 @@
 {
 	"files": [
 		{
-			"name": "bloom_pass_frag",
-			"files": [
-				"bloom_pass.frag.d3d11"
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "texCoord",
-					"type": "vec2"
-				}
-			],
-			"outputs": [
-				{
-					"name": "fragColor",
-					"type": "vec4"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "tex",
-					"type": "sampler2D"
-				}
-			],
-			"types": []
-		},
-		{
-			"name": "blur_adaptive_pass_frag",
-			"files": [
-				"blur_adaptive_pass.frag.d3d11"
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "texCoord",
-					"type": "vec2"
-				}
-			],
-			"outputs": [
-				{
-					"name": "fragColor",
-					"type": "vec4"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "gbuffer0",
-					"type": "sampler2D"
-				},
-				{
-					"name": "tex",
-					"type": "sampler2D"
-				},
-				{
-					"name": "dirInv",
-					"type": "vec2"
-				}
-			],
-			"types": []
-		},
-		{
 			"name": "blur_edge_pass_frag",
 			"files": [
 				"blur_edge_pass.frag.d3d11"
@@ -90,40 +30,6 @@
 				{
 					"name": "dirInv",
 					"type": "vec2"
-				}
-			],
-			"types": []
-		},
-		{
-			"name": "blur_gaus_pass_frag",
-			"files": [
-				"blur_gaus_pass.frag.d3d11"
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "texCoord",
-					"type": "vec2"
-				}
-			],
-			"outputs": [
-				{
-					"name": "fragColor",
-					"type": "vec4"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "dir",
-					"type": "vec2"
-				},
-				{
-					"name": "screenSize",
-					"type": "vec2"
-				},
-				{
-					"name": "tex",
-					"type": "sampler2D"
 				}
 			],
 			"types": []
@@ -267,10 +173,6 @@
 				{
 					"name": "envmapStrength",
 					"type": "float"
-				},
-				{
-					"name": "voxels",
-					"type": "sampler3D"
 				},
 				{
 					"name": "ssaotex",
@@ -671,32 +573,6 @@
 			]
 		},
 		{
-			"name": "pass_copy_frag",
-			"files": [
-				"pass_copy.frag.d3d11"
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "texCoord",
-					"type": "vec2"
-				}
-			],
-			"outputs": [
-				{
-					"name": "fragColor",
-					"type": "vec4"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "tex",
-					"type": "sampler2D"
-				}
-			],
-			"types": []
-		},
-		{
 			"name": "pass_vert",
 			"files": [
 				"pass.vert.d3d11"
@@ -723,66 +599,6 @@
 				}
 			],
 			"uniforms": [],
-			"types": [
-				{
-					"name": "gl_PerVertex",
-					"members": [
-						{
-							"type": "vec4",
-							"name": "gl_Position"
-						},
-						{
-							"type": "float",
-							"name": "gl_PointSize"
-						},
-						{
-							"type": "float[]",
-							"name": "gl_ClipDistance"
-						},
-						{
-							"type": "float[]",
-							"name": "gl_CullDistance"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "pass_viewray2_vert",
-			"files": [
-				"pass_viewray2.vert.d3d11"
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "pos",
-					"type": "vec2"
-				},
-				{
-					"name": "gl_VertexID",
-					"type": "int"
-				},
-				{
-					"name": "gl_InstanceID",
-					"type": "int"
-				}
-			],
-			"outputs": [
-				{
-					"name": "texCoord",
-					"type": "vec2"
-				},
-				{
-					"name": "viewRay",
-					"type": "vec3"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "invP",
-					"type": "mat4"
-				}
-			],
 			"types": [
 				{
 					"name": "gl_PerVertex",
@@ -885,14 +701,6 @@
 				{
 					"name": "texCoord",
 					"type": "vec2"
-				},
-				{
-					"name": "wvpposition",
-					"type": "vec4"
-				},
-				{
-					"name": "prevwvpposition",
-					"type": "vec4"
 				}
 			],
 			"outputs": [
@@ -945,14 +753,6 @@
 				{
 					"name": "wnormal",
 					"type": "vec3"
-				},
-				{
-					"name": "wvpposition",
-					"type": "vec4"
-				},
-				{
-					"name": "prevwvpposition",
-					"type": "vec4"
 				}
 			],
 			"uniforms": [
@@ -966,10 +766,6 @@
 				},
 				{
 					"name": "WVP",
-					"type": "mat4"
-				},
-				{
-					"name": "prevWVP",
 					"type": "mat4"
 				}
 			],
@@ -1058,39 +854,6 @@
 					]
 				}
 			]
-		},
-		{
-			"name": "savethenimbus_voxel_frag",
-			"files": [
-				"savethenimbus_voxel.frag.d3d11"
-			],
-			"type": "shader",
-			"inputs": [],
-			"outputs": [],
-			"uniforms": [],
-			"types": []
-		},
-		{
-			"name": "savethenimbus_voxel_geom",
-			"files": [
-				"savethenimbus_voxel.geom.d3d11"
-			],
-			"type": "shader",
-			"inputs": [],
-			"outputs": [],
-			"uniforms": [],
-			"types": []
-		},
-		{
-			"name": "savethenimbus_voxel_vert",
-			"files": [
-				"savethenimbus_voxel.vert.d3d11"
-			],
-			"type": "shader",
-			"inputs": [],
-			"outputs": [],
-			"uniforms": [],
-			"types": []
 		},
 		{
 			"name": "smaa_blend_weight_frag",
@@ -1364,10 +1127,6 @@
 					"type": "sampler2D"
 				},
 				{
-					"name": "sveloc",
-					"type": "sampler2D"
-				},
-				{
 					"name": "screenSizeInv",
 					"type": "vec2"
 				}
@@ -1435,19 +1194,19 @@
 			]
 		},
 		{
-			"name": "ssgi_pass_frag",
+			"name": "ssao_pass_frag",
 			"files": [
-				"ssgi_pass.frag.d3d11"
+				"ssao_pass.frag.d3d11"
 			],
 			"type": "shader",
 			"inputs": [
 				{
-					"name": "viewRay",
-					"type": "vec3"
-				},
-				{
 					"name": "texCoord",
 					"type": "vec2"
+				},
+				{
+					"name": "viewRay",
+					"type": "vec3"
 				}
 			],
 			"outputs": [
@@ -1458,112 +1217,32 @@
 			],
 			"uniforms": [
 				{
-					"name": "P",
-					"type": "mat4"
-				},
-				{
 					"name": "gbufferD",
 					"type": "sampler2D"
-				},
-				{
-					"name": "cameraProj",
-					"type": "vec2"
 				},
 				{
 					"name": "gbuffer0",
 					"type": "sampler2D"
 				},
 				{
-					"name": "V3",
-					"type": "mat3"
-				}
-			],
-			"types": []
-		},
-		{
-			"name": "ssr_pass_frag",
-			"files": [
-				"ssr_pass.frag.d3d11"
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "viewRay",
+					"name": "eyeLook",
 					"type": "vec3"
 				},
 				{
-					"name": "texCoord",
-					"type": "vec2"
-				}
-			],
-			"outputs": [
-				{
-					"name": "fragColor",
-					"type": "vec4"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "P",
-					"type": "mat4"
-				},
-				{
-					"name": "gbufferD",
-					"type": "sampler2D"
-				},
-				{
 					"name": "cameraProj",
 					"type": "vec2"
 				},
 				{
-					"name": "gbuffer0",
-					"type": "sampler2D"
-				},
-				{
-					"name": "gbuffer1",
-					"type": "sampler2D"
-				},
-				{
-					"name": "V3",
-					"type": "mat3"
-				},
-				{
-					"name": "tex",
-					"type": "sampler2D"
-				}
-			],
-			"types": []
-		},
-		{
-			"name": "taa_pass_frag",
-			"files": [
-				"taa_pass.frag.d3d11"
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "texCoord",
+					"name": "screenSize",
 					"type": "vec2"
-				}
-			],
-			"outputs": [
-				{
-					"name": "fragColor",
-					"type": "vec4"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "tex",
-					"type": "sampler2D"
 				},
 				{
-					"name": "sveloc",
-					"type": "sampler2D"
+					"name": "eye",
+					"type": "vec3"
 				},
 				{
-					"name": "tex2",
-					"type": "sampler2D"
+					"name": "invVP",
+					"type": "mat4"
 				}
 			],
 			"types": []

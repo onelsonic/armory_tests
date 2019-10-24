@@ -11,8 +11,6 @@ uniform float3 eyeLook;
 uniform float2 cameraProj;
 uniform float3 backgroundCol;
 uniform float envmapStrength;
-Texture3D<float4> voxels;
-SamplerState _voxels_sampler;
 Texture2D<float4> ssaotex;
 SamplerState _ssaotex_sampler;
 uniform float3 sunDir;
@@ -35,8 +33,6 @@ struct SPIRV_Cross_Output
 {
     float4 fragColor : SV_Target0;
 };
-
-float3 _603;
 
 float2 octahedronWrap(float2 v)
 {
@@ -86,62 +82,6 @@ float3 shIrradiance(float3 nor)
     return ((((((((((cl22 * 0.429042994976043701171875f) * ((nor.y * nor.y) - ((-nor.z) * (-nor.z)))) + (((cl20 * 0.743125021457672119140625f) * nor.x) * nor.x)) + (cl00 * 0.88622701168060302734375f)) - (cl20 * 0.2477079927921295166015625f)) + (((cl2m2 * 0.85808598995208740234375f) * nor.y) * (-nor.z))) + (((cl21 * 0.85808598995208740234375f) * nor.y) * nor.x)) + (((cl2m1 * 0.85808598995208740234375f) * (-nor.z)) * nor.x)) + ((cl11 * 1.02332794666290283203125f) * nor.y)) + ((cl1m1 * 1.02332794666290283203125f) * (-nor.z))) + ((cl10 * 1.02332794666290283203125f) * nor.x);
 }
 
-float3 tangent(float3 n)
-{
-    float3 t1 = cross(n, float3(0.0f, 0.0f, 1.0f));
-    float3 t2 = cross(n, float3(0.0f, 1.0f, 0.0f));
-    if (length(t1) > length(t2))
-    {
-        return normalize(t1);
-    }
-    else
-    {
-        return normalize(t2);
-    }
-}
-
-float traceConeAO(Texture3D<float4> voxels_1, SamplerState _voxels_1_sampler, float3 origin, inout float3 dir, float aperture, float maxDist)
-{
-    dir = normalize(dir);
-    float sampleCol = 0.0f;
-    float dist = 0.0234375f;
-    float diam = dist * aperture;
-    while ((sampleCol < 1.0f) && (dist < maxDist))
-    {
-        float3 samplePos = (dir * dist) + origin;
-        float mip = max(log2(diam * 128.0f), 0.0f);
-        float mipSample = voxels_1.SampleLevel(_voxels_1_sampler, (samplePos * 0.5f) + 0.5f.xxx, mip).x;
-        sampleCol += ((1.0f - sampleCol) * mipSample);
-        dist += max(diam / 2.0f, 0.015625f);
-        diam = dist * aperture;
-    }
-    return sampleCol;
-}
-
-float traceAO(float3 origin, float3 normal, Texture3D<float4> voxels_1, SamplerState _voxels_1_sampler)
-{
-    float3 o1 = normalize(tangent(normal));
-    float3 o2 = normalize(cross(o1, normal));
-    float3 c1 = (o1 + o2) * 0.5f;
-    float3 c2 = (o1 - o2) * 0.5f;
-    float3 param = normal;
-    float _680 = traceConeAO(voxels_1, _voxels_1_sampler, origin, param, 0.557851731777191162109375f, 3.4641015529632568359375f);
-    float col = _680;
-    float3 param_1 = lerp(normal, o1, 0.5f.xxx);
-    float _685 = traceConeAO(voxels_1, _voxels_1_sampler, origin, param_1, 0.557851731777191162109375f, 3.4641015529632568359375f);
-    col += _685;
-    float3 param_2 = lerp(normal, o2, 0.5f.xxx);
-    float _692 = traceConeAO(voxels_1, _voxels_1_sampler, origin, param_2, 0.557851731777191162109375f, 3.4641015529632568359375f);
-    col += _692;
-    float3 param_3 = lerp(normal, -c1, 0.5f.xxx);
-    float _700 = traceConeAO(voxels_1, _voxels_1_sampler, origin, param_3, 0.557851731777191162109375f, 3.4641015529632568359375f);
-    col += _700;
-    float3 param_4 = lerp(normal, -c2, 0.5f.xxx);
-    float _708 = traceConeAO(voxels_1, _voxels_1_sampler, origin, param_4, 0.557851731777191162109375f, 3.4641015529632568359375f);
-    col += _708;
-    return (col / 5.0f) * 0.930000007152557373046875f;
-}
-
 float3 lambertDiffuseBRDF(float3 albedo, float nl)
 {
     return albedo * max(0.0f, nl);
@@ -180,24 +120,24 @@ float4x4 getCascadeMat(float d, inout int casi, inout int casIndex)
 
 float PCF(Texture2D<float4> shadowMap_1, SamplerComparisonState _shadowMap_1_sampler, float2 uv, float compare, float2 smSize)
 {
-    float3 _259 = float3(uv + ((-1.0f).xx / smSize), compare);
-    float result = shadowMap_1.SampleCmp(_shadowMap_1_sampler, _259.xy, _259.z);
-    float3 _268 = float3(uv + (float2(-1.0f, 0.0f) / smSize), compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _268.xy, _268.z);
-    float3 _279 = float3(uv + (float2(-1.0f, 1.0f) / smSize), compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _279.xy, _279.z);
-    float3 _290 = float3(uv + (float2(0.0f, -1.0f) / smSize), compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _290.xy, _290.z);
-    float3 _298 = float3(uv, compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _298.xy, _298.z);
-    float3 _309 = float3(uv + (float2(0.0f, 1.0f) / smSize), compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _309.xy, _309.z);
-    float3 _320 = float3(uv + (float2(1.0f, -1.0f) / smSize), compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _320.xy, _320.z);
-    float3 _331 = float3(uv + (float2(1.0f, 0.0f) / smSize), compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _331.xy, _331.z);
-    float3 _342 = float3(uv + (1.0f.xx / smSize), compare);
-    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _342.xy, _342.z);
+    float3 _239 = float3(uv + ((-1.0f).xx / smSize), compare);
+    float result = shadowMap_1.SampleCmp(_shadowMap_1_sampler, _239.xy, _239.z);
+    float3 _248 = float3(uv + (float2(-1.0f, 0.0f) / smSize), compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _248.xy, _248.z);
+    float3 _259 = float3(uv + (float2(-1.0f, 1.0f) / smSize), compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _259.xy, _259.z);
+    float3 _270 = float3(uv + (float2(0.0f, -1.0f) / smSize), compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _270.xy, _270.z);
+    float3 _278 = float3(uv, compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _278.xy, _278.z);
+    float3 _289 = float3(uv + (float2(0.0f, 1.0f) / smSize), compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _289.xy, _289.z);
+    float3 _300 = float3(uv + (float2(1.0f, -1.0f) / smSize), compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _300.xy, _300.z);
+    float3 _311 = float3(uv + (float2(1.0f, 0.0f) / smSize), compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _311.xy, _311.z);
+    float3 _322 = float3(uv + (1.0f.xx / smSize), compare);
+    result += shadowMap_1.SampleCmp(_shadowMap_1_sampler, _322.xy, _322.z);
     return result / 9.0f;
 }
 
@@ -206,41 +146,41 @@ float shadowTestCascade(Texture2D<float4> shadowMap_1, SamplerComparisonState _s
     float d = distance(eye_1, p);
     int param;
     int param_1;
-    float4x4 _438 = getCascadeMat(d, param, param_1);
+    float4x4 _418 = getCascadeMat(d, param, param_1);
     int casi = param;
     int casIndex = param_1;
-    float4x4 LWVP = _438;
+    float4x4 LWVP = _418;
     float4 lPos = mul(float4(p, 1.0f), LWVP);
-    float3 _453 = lPos.xyz / lPos.w.xxx;
-    lPos = float4(_453.x, _453.y, _453.z, lPos.w);
+    float3 _433 = lPos.xyz / lPos.w.xxx;
+    lPos = float4(_433.x, _433.y, _433.z, lPos.w);
     float visibility = 1.0f;
     if (lPos.w > 0.0f)
     {
-        visibility = PCF(shadowMap_1, _shadowMap_1_sampler, lPos.xy, lPos.z - shadowsBias_1, float2(16384.0f, 4096.0f));
+        visibility = PCF(shadowMap_1, _shadowMap_1_sampler, lPos.xy, lPos.z - shadowsBias_1, float2(4096.0f, 1024.0f));
     }
     float nextSplit = casData[16][casi];
-    float _479;
+    float _459;
     if (casi == 0)
     {
-        _479 = nextSplit;
+        _459 = nextSplit;
     }
     else
     {
-        _479 = nextSplit - (casData[16][casi - 1]);
+        _459 = nextSplit - (casData[16][casi - 1]);
     }
-    float splitSize = _479;
+    float splitSize = _459;
     float splitDist = (nextSplit - d) / splitSize;
     if ((splitDist <= 0.1500000059604644775390625f) && (casi != 3))
     {
         int casIndex2 = casIndex + 4;
         float4x4 LWVP2 = float4x4(float4(casData[casIndex2]), float4(casData[casIndex2 + 1]), float4(casData[casIndex2 + 2]), float4(casData[casIndex2 + 3]));
         float4 lPos2 = mul(float4(p, 1.0f), LWVP2);
-        float3 _557 = lPos2.xyz / lPos2.w.xxx;
-        lPos2 = float4(_557.x, _557.y, _557.z, lPos2.w);
+        float3 _537 = lPos2.xyz / lPos2.w.xxx;
+        lPos2 = float4(_537.x, _537.y, _537.z, lPos2.w);
         float visibility2 = 1.0f;
         if (lPos2.w > 0.0f)
         {
-            visibility2 = PCF(shadowMap_1, _shadowMap_1_sampler, lPos2.xy, lPos2.z - shadowsBias_1, float2(16384.0f, 4096.0f));
+            visibility2 = PCF(shadowMap_1, _shadowMap_1_sampler, lPos2.xy, lPos2.z - shadowsBias_1, float2(4096.0f, 1024.0f));
         }
         float lerpAmt = smoothstep(0.0f, 0.1500000059604644775390625f, splitDist);
         return lerp(visibility2, visibility, lerpAmt);
@@ -253,16 +193,16 @@ void frag_main()
     float4 g0 = gbuffer0.SampleLevel(_gbuffer0_sampler, texCoord, 0.0f);
     float3 n;
     n.z = (1.0f - abs(g0.x)) - abs(g0.y);
-    float2 _893;
+    float2 _737;
     if (n.z >= 0.0f)
     {
-        _893 = g0.xy;
+        _737 = g0.xy;
     }
     else
     {
-        _893 = octahedronWrap(g0.xy);
+        _737 = octahedronWrap(g0.xy);
     }
-    n = float3(_893.x, _893.y, n.z);
+    n = float3(_737.x, _737.y, n.z);
     n = normalize(n);
     float roughness = g0.z;
     float param;
@@ -282,11 +222,9 @@ void frag_main()
     envl *= albedo;
     envl += (backgroundCol * surfaceF0(g1.xyz, metallic));
     envl *= (envmapStrength * occspec.x);
-    float3 voxpos = p / 8.0f.xxx;
-    envl *= (1.0f - traceAO(voxpos, n, voxels, _voxels_sampler));
     fragColor = float4(envl.x, envl.y, envl.z, fragColor.w);
-    float3 _1017 = fragColor.xyz * ssaotex.SampleLevel(_ssaotex_sampler, texCoord, 0.0f).x;
-    fragColor = float4(_1017.x, _1017.y, _1017.z, fragColor.w);
+    float3 _849 = fragColor.xyz * ssaotex.SampleLevel(_ssaotex_sampler, texCoord, 0.0f).x;
+    fragColor = float4(_849.x, _849.y, _849.z, fragColor.w);
     float3 sh = normalize(v + sunDir);
     float sdotNH = dot(n, sh);
     float sdotVH = dot(v, sh);
@@ -294,8 +232,8 @@ void frag_main()
     float svisibility = 1.0f;
     float3 sdirect = lambertDiffuseBRDF(albedo, sdotNL) + (specularBRDF(f0, roughness, sdotNL, sdotNH, dotNV, sdotVH) * occspec.y);
     svisibility = shadowTestCascade(shadowMap, _shadowMap_sampler, eye, p + ((n * shadowsBias) * 10.0f), shadowsBias);
-    float3 _1074 = fragColor.xyz + ((sdirect * svisibility) * sunCol);
-    fragColor = float4(_1074.x, _1074.y, _1074.z, fragColor.w);
+    float3 _906 = fragColor.xyz + ((sdirect * svisibility) * sunCol);
+    fragColor = float4(_906.x, _906.y, _906.z, fragColor.w);
     fragColor.w = 1.0f;
 }
 

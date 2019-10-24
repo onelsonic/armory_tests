@@ -2,12 +2,10 @@ Texture2D<float4> blendTex;
 SamplerState _blendTex_sampler;
 Texture2D<float4> colorTex;
 SamplerState _colorTex_sampler;
-Texture2D<float4> sveloc;
-SamplerState _sveloc_sampler;
 uniform float2 screenSizeInv;
 
-static float2 texCoord;
 static float4 fragColor;
+static float2 texCoord;
 static float4 offset;
 
 struct SPIRV_Cross_Input
@@ -37,8 +35,6 @@ float4 SMAANeighborhoodBlendingPS(float2 texcoord, float4 offset_1)
     if (dot(a, 1.0f.xxxx) < 9.9999997473787516355514526367188e-06f)
     {
         float4 color = colorTex.SampleLevel(_colorTex_sampler, texcoord, 0.0f);
-        float2 velocity = sveloc.SampleLevel(_sveloc_sampler, texCoord, 0.0f).xy;
-        color.w = sqrt(5.0f * length(velocity));
         return color;
     }
     else
@@ -60,21 +56,12 @@ float4 SMAANeighborhoodBlendingPS(float2 texcoord, float4 offset_1)
         float4 blendingCoord = (blendingOffset * float4(screenSizeInv, -screenSizeInv)) + tc.xyxy;
         float2 param = blendingCoord.xy;
         float param_1 = 0.0f;
-        float4 _168 = textureLodA(colorTex, _colorTex_sampler, param, param_1);
-        float4 color_1 = _168 * blendingWeight.x;
+        float4 _154 = textureLodA(colorTex, _colorTex_sampler, param, param_1);
+        float4 color_1 = _154 * blendingWeight.x;
         float2 param_2 = blendingCoord.zw;
         float param_3 = 0.0f;
-        float4 _176 = textureLodA(colorTex, _colorTex_sampler, param_2, param_3);
-        color_1 += (_176 * blendingWeight.y);
-        float2 param_4 = blendingCoord.xy;
-        float param_5 = 0.0f;
-        float4 _187 = textureLodA(sveloc, _sveloc_sampler, param_4, param_5);
-        float2 velocity_1 = _187.xy * blendingWeight.x;
-        float2 param_6 = blendingCoord.zw;
-        float param_7 = 0.0f;
-        float4 _196 = textureLodA(sveloc, _sveloc_sampler, param_6, param_7);
-        velocity_1 += (_196.xy * blendingWeight.y);
-        color_1.w = sqrt(5.0f * length(velocity_1));
+        float4 _162 = textureLodA(colorTex, _colorTex_sampler, param_2, param_3);
+        color_1 += (_162 * blendingWeight.y);
         return color_1;
     }
     return 0.0f.xxxx;

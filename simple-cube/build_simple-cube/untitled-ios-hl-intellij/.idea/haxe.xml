@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="HaxeProjectSettings" defines="hxcpp_smart_strings,C:/armorySDK1910myEdits/armory,C:/armorySDK1910myEdits/iron,arm_legacy,rp_renderer=Forward,rp_shadowmap,rp_shadowmap_cascade=1024,rp_shadowmap_cube=256,rp_background=Clear,rp_render_to_texture,rp_antialiasing=Off,rp_supersampling=1,rp_ssgi=Off,rp_resolution_filter=Point,arm_audio,arm_published,arm_soundcompress,arm_skin,arm_particles,arm_loadscreen,no-compilation,sys_ios,sys_g1,sys_g2,sys_g3,sys_g4,sys_a1,sys_a2,kha_hl,kha_ios,kha_ios_hl,kha_opengl,kha_g1,kha_g2,kha_g3,kha_g4,kha_a1,kha_a2,kha,kha_version=1810,kha_project_name=untitled-dce full," />
-</project>
