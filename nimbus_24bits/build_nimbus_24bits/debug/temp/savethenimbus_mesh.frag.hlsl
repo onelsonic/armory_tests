@@ -1,5 +1,7 @@
-Texture2D<float4> ImageTexture_004;
-SamplerState _ImageTexture_004_sampler;
+Texture2D<float4> ImageTexture_008;
+SamplerState _ImageTexture_008_sampler;
+Texture2D<float4> ImageTexture_010;
+SamplerState _ImageTexture_010_sampler;
 
 static float3 wnormal;
 static float2 texCoord;
@@ -34,26 +36,36 @@ float packFloat2(float f1, float f2)
 void frag_main()
 {
     float3 n = normalize(wnormal);
-    float4 ImageTexture_004_texread_store = ImageTexture_004.Sample(_ImageTexture_004_sampler, texCoord);
-    float3 _82 = pow(ImageTexture_004_texread_store.xyz, 2.2000000476837158203125f.xxx);
-    ImageTexture_004_texread_store = float4(_82.x, _82.y, _82.z, ImageTexture_004_texread_store.w);
-    float3 ImageTexture_004_Color_res = ImageTexture_004_texread_store.xyz;
-    float3 basecol = 0.4000000059604644775390625f.xxx + (ImageTexture_004_Color_res * 0.5f);
-    float roughness = 0.5f;
+    float4 ImageTexture_008_texread_store = ImageTexture_008.Sample(_ImageTexture_008_sampler, texCoord);
+    float3 _82 = pow(ImageTexture_008_texread_store.xyz, 2.2000000476837158203125f.xxx);
+    ImageTexture_008_texread_store = float4(_82.x, _82.y, _82.z, ImageTexture_008_texread_store.w);
+    float4 ImageTexture_010_texread_store = ImageTexture_010.Sample(_ImageTexture_010_sampler, texCoord);
+    float3 _92 = pow(ImageTexture_010_texread_store.xyz, 2.2000000476837158203125f.xxx);
+    ImageTexture_010_texread_store = float4(_92.x, _92.y, _92.z, ImageTexture_010_texread_store.w);
+    float3 ImageTexture_008_Color_res = ImageTexture_008_texread_store.xyz;
+    float3 ImageTexture_010_Color_res = ImageTexture_010_texread_store.xyz;
+    float Math_Value_res = ImageTexture_010_Color_res.x - 0.00019999999494757503271102905273438f;
+    float3 basecol = ImageTexture_008_Color_res;
+    float roughness = 1.0f;
     float metallic = 0.0f;
     float occlusion = 1.0f;
-    float specular = 0.5f;
+    float specular = 0.0f;
+    float opacity = Math_Value_res;
+    if (opacity < 0.99989998340606689453125f)
+    {
+        discard;
+    }
     n /= ((abs(n.x) + abs(n.y)) + abs(n.z)).xxx;
-    float2 _119;
+    float2 _140;
     if (n.z >= 0.0f)
     {
-        _119 = n.xy;
+        _140 = n.xy;
     }
     else
     {
-        _119 = octahedronWrap(n.xy);
+        _140 = octahedronWrap(n.xy);
     }
-    n = float3(_119.x, _119.y, n.z);
+    n = float3(_140.x, _140.y, n.z);
     fragColor[0] = float4(n.xy, roughness, packFloatInt16(metallic, 0u));
     fragColor[1] = float4(basecol, packFloat2(occlusion, specular));
 }
