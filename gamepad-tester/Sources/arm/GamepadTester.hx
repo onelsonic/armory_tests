@@ -6,7 +6,7 @@ import armory.trait.internal.CanvasScript;
 
 class GamepadTester extends iron.Trait {
 	var canvas:CanvasScript;
-	var gamepad = Input.getGamepad();
+	var gamepad = Input.getGamepad(0);
 	var inileftStickx = 0.0;
 	var inileftSticky = 0.0;
 	var inirightStickx = 0.0;
@@ -20,8 +20,7 @@ class GamepadTester extends iron.Trait {
 		});
 
 		notifyOnUpdate(function() {
-
-			if (gamepadnotcalibrated && gamepad.leftStick.x!=0 && gamepad.leftStick.y!=0 && gamepad.rightStick.x!=0 && gamepad.rightStick.y!=0) {
+			if (gamepadnotcalibrated && (gamepad.leftStick.x!=0 || gamepad.leftStick.y!=0 || gamepad.rightStick.x!=0 || gamepad.rightStick.y!=0)) {
 				inileftStickx = gamepad.leftStick.x;
 				inileftSticky = gamepad.leftStick.y;
 				inirightStickx = gamepad.rightStick.x;
