@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="HAXE_MODULE" version="4">
+  <component name="HaxeModuleSettingsStorage">
+    <option name="arguments" value="" />
+    <option name="buildConfig" value="1" />
+    <option name="excludeFromCompilation" value="true" />
+    <option name="flexSdkName" value="flex_sdk_4.6" />
+    <option name="haxeTarget" value="C++" />
+    <option name="hxmlPath" value="$MODULE_DIR$/../gamepad-tester-android-hl.hxml" />
+    <option name="mainClass" value="Main" />
+    <option name="outputFileName" value="kha.swf" />
+    <option name="outputFolder" value="$MODULE_DIR$/../android-hl" />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../android-hl" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../..">
+      <sourceFolder url="file://C:\armorySDK1910winEdits\Kha\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorySDK1910winEdits\Kha\Backends\KoreHL" isTestSource="false" />
+      <sourceFolder url="file://C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\gamepad-tester\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorySDK1910winEdits\armory\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorySDK1910winEdits\iron\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorySDK1910winEdits\lib\zui\Sources" isTestSource="false" />
+
+    </content>
+    <content url="file://C:/armorySDK1910winEdits/armory">
+      <sourceFolder url="file://C:/armorySDK1910winEdits/armory" isTestSource="false" />
+    </content>
+    <content url="file://C:/armorySDK1910winEdits/iron">
+      <sourceFolder url="file://C:/armorySDK1910winEdits/iron" isTestSource="false" />
+    </content>
+    <content url="file://C:/armorySDK1910winEdits/lib/zui">
+      <sourceFolder url="file://C:/armorySDK1910winEdits/lib/zui" isTestSource="false" />
+    </content>
+    
+    <orderEntry type="jdk" jdkName="Haxe 3.2.0" jdkType="Haxe toolkit" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
