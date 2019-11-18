@@ -57,7 +57,7 @@ var index;
         SoundArray[6].src = "./data/audio/LineCleared." + SoundType;
         SoundArray[7].src = "./data/audio/TetriCleared." + SoundType;
         SoundArray[8].src = "./data/audio/LevelUp." + SoundType;
-        SoundArray[9].src = "./data/audio/MustThinkInRussian." + SoundType;
+        SoundArray[9].src = "./data/audio/MustThinkIntestn." + SoundType;
         SoundArray[10].src = "./data/audio/IncomingLine." + SoundType;
         SoundArray[11].src = "./data/audio/GameOver." + SoundType;
         SoundArray[12].src = "./data/audio/Crack." + SoundType;
@@ -80,7 +80,7 @@ var index;
 //--------------------------------------------------------------------------------------------------------------
 function PlaySoundEffect(index)
 {
-    if (ThinkRussianTimer > 0)  return;
+    if (ThinktestnTimer > 0)  return;
     
     if (SoundType === "null")  return;
     if ( index > (NumberOfSoundEffects-1) )  return;
