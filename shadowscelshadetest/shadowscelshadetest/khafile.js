@@ -9,12 +9,12 @@ project.addLibrary("C:/armorylatest/armorySDKlastest/lib/haxebullet");
 project.addAssets("C:/armorylatest/armorySDKlastest/lib/haxebullet/ammo/ammo.wasm.js", { notinlist: true });
 project.addAssets("C:/armorylatest/armorySDKlastest/lib/haxebullet/ammo/ammo.wasm.wasm", { notinlist: true });
 project.addParameter('-dce full');
-project.addParameter('armory.trait.physics.bullet.PhysicsWorld');
-project.addParameter("--macro keep('armory.trait.physics.bullet.PhysicsWorld')");
-project.addParameter('arm.SimpleRotateObject');
-project.addParameter("--macro keep('arm.SimpleRotateObject')");
 project.addParameter('armory.trait.physics.bullet.RigidBody');
 project.addParameter("--macro keep('armory.trait.physics.bullet.RigidBody')");
+project.addParameter('arm.SimpleRotateObject');
+project.addParameter("--macro keep('arm.SimpleRotateObject')");
+project.addParameter('armory.trait.physics.bullet.PhysicsWorld');
+project.addParameter("--macro keep('armory.trait.physics.bullet.PhysicsWorld')");
 project.addShaders("build_shadowscelshadetest/compiled/Shaders/*.glsl", { noembed: false});
 project.addShaders("build_shadowscelshadetest/compiled/Hlsl/*.glsl", { noprocessing: true, noembed: false });
 project.addAssets("build_shadowscelshadetest/compiled/Assets/**", { notinlist: true , destination: "data/{name}"});
@@ -36,6 +36,7 @@ project.addDefine('arm_soundcompress');
 project.addDefine('arm_skin');
 project.addDefine('arm_particles');
 project.addDefine('arm_loadscreen');
+project.addDefine('arm_resizable');
 
 
 resolve(project);

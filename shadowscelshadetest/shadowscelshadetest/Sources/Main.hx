@@ -11,9 +11,9 @@ class Main {
         armory.system.Starter.main(
             'Scene',
             0,
-            false,
             true,
-            false,
+            true,
+            true,
             1920,
             1080,
             1,
