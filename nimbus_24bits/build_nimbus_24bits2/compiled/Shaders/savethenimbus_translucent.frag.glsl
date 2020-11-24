@@ -18,13 +18,11 @@ uniform sampler2DShadow shadowMap;
 uniform float shadowsBias;
 uniform vec3 eye;
 void main() {
-vec3 n = normalize(wnormal);
+	vec3 n = normalize(wnormal);
+	vec3 vVec = normalize(eyeDir);
+	float dotNV = max(dot(n, vVec), 0.0);
 	vec4 ImageTexture_010_texread_store = texture(ImageTexture_010, texCoord.xy);
 	ImageTexture_010_texread_store.rgb = pow(ImageTexture_010_texread_store.rgb, vec3(2.2));
-
-    vec3 vVec = normalize(eyeDir);
-    float dotNV = max(dot(n, vVec), 0.0);
-
 	vec3 basecol;
 	float roughness;
 	float metallic;

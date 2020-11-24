@@ -13,8 +13,8 @@ uniform float3 sunCol;
 
 static float4 gl_FragCoord;
 static float3 wnormal;
-static float2 texCoord;
 static float3 eyeDir;
+static float2 texCoord;
 static float3 wposition;
 static float4 fragColor[2];
 
@@ -165,11 +165,11 @@ float3 specularBRDF(float3 f0, float roughness, float nl, float nh, float nv, fl
 void frag_main()
 {
     float3 n = normalize(wnormal);
-    float4 ImageTexture_010_texread_store = ImageTexture_010.Sample(_ImageTexture_010_sampler, texCoord);
-    float3 _627 = pow(ImageTexture_010_texread_store.xyz, 2.2000000476837158203125f.xxx);
-    ImageTexture_010_texread_store = float4(_627.x, _627.y, _627.z, ImageTexture_010_texread_store.w);
     float3 vVec = normalize(eyeDir);
     float dotNV = max(dot(n, vVec), 0.0f);
+    float4 ImageTexture_010_texread_store = ImageTexture_010.Sample(_ImageTexture_010_sampler, texCoord);
+    float3 _636 = pow(ImageTexture_010_texread_store.xyz, 2.2000000476837158203125f.xxx);
+    ImageTexture_010_texread_store = float4(_636.x, _636.y, _636.z, ImageTexture_010_texread_store.w);
     float3 ImageTexture_010_Color_res = ImageTexture_010_texread_store.xyz;
     float ImageTexture_010_Alpha_res = ImageTexture_010_texread_store.w;
     float3 basecol = ImageTexture_010_Color_res;
@@ -209,8 +209,8 @@ SPIRV_Cross_Output main(SPIRV_Cross_Input stage_input)
 {
     gl_FragCoord = stage_input.gl_FragCoord;
     wnormal = stage_input.wnormal;
-    texCoord = stage_input.texCoord;
     eyeDir = stage_input.eyeDir;
+    texCoord = stage_input.texCoord;
     wposition = stage_input.wposition;
     frag_main();
     SPIRV_Cross_Output stage_output;

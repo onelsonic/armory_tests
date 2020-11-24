@@ -21,12 +21,7 @@
 					"type": "vec4"
 				}
 			],
-			"uniforms": [
-				{
-					"name": "backgroundCol",
-					"type": "vec3"
-				}
-			],
+			"uniforms": [],
 			"types": []
 		},
 		{
@@ -1035,12 +1030,12 @@
 					"type": "vec3"
 				},
 				{
-					"name": "texCoord",
-					"type": "vec2"
-				},
-				{
 					"name": "eyeDir",
 					"type": "vec3"
+				},
+				{
+					"name": "texCoord",
+					"type": "vec2"
 				},
 				{
 					"name": "wposition",
@@ -1138,11 +1133,11 @@
 					"type": "vec2"
 				},
 				{
-					"name": "wposition",
+					"name": "wnormal",
 					"type": "vec3"
 				},
 				{
-					"name": "wnormal",
+					"name": "wposition",
 					"type": "vec3"
 				},
 				{
@@ -1156,12 +1151,12 @@
 					"type": "float"
 				},
 				{
-					"name": "W",
-					"type": "mat4"
-				},
-				{
 					"name": "N",
 					"type": "mat3"
+				},
+				{
+					"name": "W",
+					"type": "mat4"
 				},
 				{
 					"name": "WVP",

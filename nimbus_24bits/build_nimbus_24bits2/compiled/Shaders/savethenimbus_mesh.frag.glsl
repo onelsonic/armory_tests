@@ -6,7 +6,7 @@ in vec3 wnormal;
 out vec4 fragColor[2];
 uniform sampler2D ImageTexture_010;
 void main() {
-vec3 n = normalize(wnormal);
+	vec3 n = normalize(wnormal);
 	vec4 ImageTexture_010_texread_store = texture(ImageTexture_010, texCoord.xy);
 	ImageTexture_010_texread_store.rgb = pow(ImageTexture_010_texread_store.rgb, vec3(2.2));
 	vec3 basecol;
