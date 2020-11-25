@@ -33,11 +33,11 @@ highp vec3 shIrradiance(highp vec3 nor, highp vec4 shirr_1[7])
 void main()
 {
     highp vec3 n = normalize(wnormal);
-    highp vec3 basecol = vec3(0.006995410658419132232666015625, 0.0040247184224426746368408203125, 0.0036765080876648426055908203125);
-    highp float roughness = 1.0;
+    highp vec3 basecol = vec3(0.800000011920928955078125);
+    highp float roughness = 0.5;
     highp float metallic = 0.0;
     highp float occlusion = 1.0;
-    highp float specular = 0.0;
+    highp float specular = 0.5;
     highp vec3 direct = vec3(0.0);
     highp float visibility = 1.0;
     highp vec3 ld = pointPos - wposition;
@@ -45,7 +45,7 @@ void main()
     highp float dotNL = max(dot(n, l), 0.0);
     direct += ((((basecol * dotNL) * pointCol) * attenuate(distance(wposition, pointPos))) * visibility);
     fragColor = vec4(direct + ((basecol * shIrradiance(n, shirr)) * envmapStrength), 1.0);
-    highp vec3 _228 = pow(fragColor.xyz, vec3(0.4545454680919647216796875));
-    fragColor = vec4(_228.x, _228.y, _228.z, fragColor.w);
+    highp vec3 _227 = pow(fragColor.xyz, vec3(0.4545454680919647216796875));
+    fragColor = vec4(_227.x, _227.y, _227.z, fragColor.w);
 }
 

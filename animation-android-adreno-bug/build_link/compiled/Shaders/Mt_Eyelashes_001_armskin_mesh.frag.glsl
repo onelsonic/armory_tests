@@ -17,11 +17,11 @@ void main() {
 	float metallic;
 	float occlusion;
 	float specular;
-	basecol = vec3(0.006995410658419132, 0.004024718422442675, 0.0036765080876648426);
-	roughness = 1.0;
+	basecol = vec3(0.800000011920929, 0.800000011920929, 0.800000011920929);
+	roughness = 0.5;
 	metallic = 0.0;
 	occlusion = 1.0;
-	specular = 0.0;
+	specular = 0.5;
 	vec3 direct = vec3(0.0);
 	float visibility = 1.0;
 	vec3 ld = pointPos - wposition;

@@ -40,7 +40,7 @@ void main()
     ImageTexture_texread_store = vec4(_177.x, _177.y, _177.z, ImageTexture_texread_store.w);
     highp vec3 ImageTexture_Color_res = ImageTexture_texread_store.xyz;
     highp vec3 basecol = ImageTexture_Color_res;
-    highp float roughness = 1.0;
+    highp float roughness = 0.0;
     highp float metallic = 0.0;
     highp float occlusion = 1.0;
     highp float specular = 0.0;

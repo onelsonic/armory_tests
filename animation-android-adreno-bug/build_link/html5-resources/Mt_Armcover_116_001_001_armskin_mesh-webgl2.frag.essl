@@ -34,7 +34,7 @@ void main()
 {
     highp vec3 n = normalize(wnormal);
     highp vec3 basecol = vec3(0.304987430572509765625, 0.11193238198757171630859375, 0.01850023306906223297119140625);
-    highp float roughness = 1.0;
+    highp float roughness = 0.0;
     highp float metallic = 0.0;
     highp float occlusion = 1.0;
     highp float specular = 0.0;

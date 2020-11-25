@@ -23,7 +23,7 @@ void main() {
 	float specular;
 	vec3 ImageTexture_Color_res = ImageTexture_texread_store.rgb;
 	basecol = ImageTexture_Color_res;
-	roughness = 1.0;
+	roughness = 0.0;
 	metallic = 0.0;
 	occlusion = 1.0;
 	specular = 0.0;
