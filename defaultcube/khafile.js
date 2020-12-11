@@ -1,5 +1,5 @@
 // Auto-generated
-let project = new Project('defaultcube_1_0_3');
+let project = new Project('defaultcube_1_0_6');
 
 project.addSources('Sources');
 project.addLibrary("C:/armorylatest/armorySDKlastest/armory");

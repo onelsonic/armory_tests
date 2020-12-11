@@ -1,6 +1,6 @@
 -cp C:\armorylatest\armorySDKlastest\Kha\Sources
 -cp C:\armorylatest\armorySDKlastest\Kha\Backends\HTML5
--cp C:\Users\devWin10\Desktop\defaultcube\Sources
+-cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\defaultcube\Sources
 -cp C:\armorylatest\armorySDKlastest\armory\Sources
 -cp C:\armorylatest\armorySDKlastest\iron\Sources
 -cp C:/armorylatest/armorySDKlastest/armory
@@ -42,7 +42,7 @@
 -D kha_html5_js
 -D kha
 -D kha_version=1810
--D kha_project_name=defaultcube_1_0_3
+-D kha_project_name=defaultcube_1_0_6
 -js html5\kha.js
 -dce full
 -main Main

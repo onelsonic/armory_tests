@@ -2,7 +2,7 @@
 package ;
 class Main {
     public static inline var projectName = 'defaultcube';
-    public static inline var projectVersion = '1.0.3';
+    public static inline var projectVersion = '1.0.6';
     public static inline var projectPackage = 'arm';
     public static function main() {
         iron.object.BoneAnimation.skinMaxBones = 8;
