@@ -1,0 +1,25 @@
+#version 300 es
+
+uniform mat4 LWVP;
+
+in vec4 pos;
+in vec3 irot;
+in vec3 ipos;
+
+void main()
+{
+    vec4 spos = vec4(pos.xyz, 1.0);
+    float srotx = sin(irot.x);
+    float crotx = cos(irot.x);
+    float sroty = sin(irot.y);
+    float croty = cos(irot.y);
+    float srotz = sin(irot.z);
+    float crotz = cos(irot.z);
+    mat3 mirot = mat3(vec3(croty * crotz, srotz, (-sroty) * crotz), vec3((((-croty) * srotz) * crotx) + (sroty * srotx), crotz * crotx, ((sroty * srotz) * crotx) + (croty * srotx)), vec3(((croty * srotz) * srotx) + (sroty * crotx), (-crotz) * srotx, (((-sroty) * srotz) * srotx) + (croty * crotx)));
+    vec3 _116 = mirot * spos.xyz;
+    spos = vec4(_116.x, _116.y, _116.z, spos.w);
+    vec3 _123 = spos.xyz + ipos;
+    spos = vec4(_123.x, _123.y, _123.z, spos.w);
+    gl_Position = LWVP * spos;
+}
+
