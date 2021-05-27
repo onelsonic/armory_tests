@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="HAXE_MODULE" version="4">
+  <component name="HaxeModuleSettingsStorage">
+    <option name="arguments" value="" />
+    <option name="buildConfig" value="1" />
+    <option name="excludeFromCompilation" value="true" />
+    <option name="flexSdkName" value="flex_sdk_4.6" />
+    <option name="haxeTarget" value="JavaScript" />
+    <option name="hxmlPath" value="$MODULE_DIR$/../scene_1_0_6-html5.hxml" />
+    <option name="mainClass" value="Main" />
+    <option name="outputFileName" value="kha.swf" />
+    <option name="outputFolder" value="$MODULE_DIR$/../html5" />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../html5" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../..">
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\Kha\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\Kha\Backends\HTML5" isTestSource="false" />
+      <sourceFolder url="file://C:\Users\devWin10\Downloads\New folder\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\armory\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\iron\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\lib\haxebullet\Sources" isTestSource="false" />
+
+    </content>
+    <content url="file://C:/armorylatest/armorySDKlastest/armory">
+      <sourceFolder url="file://C:/armorylatest/armorySDKlastest/armory" isTestSource="false" />
+    </content>
+    <content url="file://C:/armorylatest/armorySDKlastest/iron">
+      <sourceFolder url="file://C:/armorylatest/armorySDKlastest/iron" isTestSource="false" />
+    </content>
+    <content url="file://C:/armorylatest/armorySDKlastest/lib/haxebullet">
+      <sourceFolder url="file://C:/armorylatest/armorySDKlastest/lib/haxebullet" isTestSource="false" />
+    </content>
+    
+    <orderEntry type="jdk" jdkName="Haxe 3.2.0" jdkType="Haxe toolkit" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
