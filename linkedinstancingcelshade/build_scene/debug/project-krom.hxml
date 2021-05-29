@@ -1,21 +1,18 @@
 -cp C:\armorylatest\armorySDKlastest\Kha\Sources
 -cp C:\armorylatest\armorySDKlastest\Kha\Backends\Krom
--cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancing\Sources
+-cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancingcelshade\Sources
 -cp C:\armorylatest\armorySDKlastest\armory\Sources
 -cp C:\armorylatest\armorySDKlastest\iron\Sources
--cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancing\Libraries\driver_celshade\Sources
--cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancing\Libraries\patch\Sources
+-cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancingcelshade\Libraries\driver_celshade\Sources
 -cp C:\armorylatest\armorySDKlastest\lib\haxebullet\Sources
 -cp C:/armorylatest/armorySDKlastest/armory
 -cp C:/armorylatest/armorySDKlastest/iron
--cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancing\Libraries\driver_celshade
--cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancing\Libraries\patch
+-cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\linkedinstancingcelshade\Libraries\driver_celshade
 -cp C:/armorylatest/armorySDKlastest/lib/haxebullet
 -D hxcpp_smart_strings
 -D C:/armorylatest/armorySDKlastest/armory
 -D C:/armorylatest/armorySDKlastest/iron
 -D driver_celshade
--D patch
 -D C:/armorylatest/armorySDKlastest/lib/haxebullet
 -D rp_shadowmap
 -D rp_shadowmap_cascade=1024
@@ -47,12 +44,10 @@
 -D kha_a2
 -D kha
 -D kha_version=1810
--D kha_project_name=scene_1_0_6
+-D kha_project_name=scene_1_0_2
 -js krom\krom.js.temp
-armory.trait.WalkNavigation
---macro keep('armory.trait.WalkNavigation')
-armory.trait.physics.bullet.RigidBody
---macro keep('armory.trait.physics.bullet.RigidBody')
 armory.trait.physics.bullet.PhysicsWorld
 --macro keep('armory.trait.physics.bullet.PhysicsWorld')
+armory.trait.physics.bullet.RigidBody
+--macro keep('armory.trait.physics.bullet.RigidBody')
 -main Main

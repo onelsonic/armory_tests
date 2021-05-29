@@ -12,7 +12,6 @@ void main() {
 	vec4 spos = vec4(pos.xyz, 1.0);
 	wnormal = normalize(N * vec3(nor.xy, pos.w));
 	wposition = vec4(W * spos).xyz;
-	gl_Position = WVP * spos;
 	float srotx = sin(irot.x);
 	float crotx = cos(irot.x);
 	float sroty = sin(irot.y);
@@ -27,4 +26,5 @@ void main() {
 	spos.xyz = mirot * spos.xyz;
 	wnormal = transpose(inverse(mirot)) * wnormal;
 	spos.xyz += ipos;
+	gl_Position = WVP * spos;
 }

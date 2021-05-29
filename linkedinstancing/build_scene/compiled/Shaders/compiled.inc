@@ -10,7 +10,7 @@
 #define _FlipY
 const float PI = 3.1415926535;
 const float PI2 = PI * 2.0;
-const vec2 shadowmapSize = vec2(256, 256);
+const vec2 shadowmapSize = vec2(1024, 1024);
 const float shadowmapCubePcfSize = 0.001;
 const int shadowmapCascades = 1;
 const int skinMaxBones = 8;
