@@ -262,8 +262,24 @@
 					"type": "vec2"
 				},
 				{
+					"name": "gbuffer2",
+					"type": "sampler2D"
+				},
+				{
+					"name": "senvmapBrdf",
+					"type": "sampler2D"
+				},
+				{
 					"name": "shirr",
 					"type": "vec4[]"
+				},
+				{
+					"name": "envmapNumMipmaps",
+					"type": "int"
+				},
+				{
+					"name": "senvmapRadiance",
+					"type": "sampler2D"
 				},
 				{
 					"name": "envmapStrength",
@@ -692,6 +708,35 @@
 			]
 		},
 		{
+			"name": "pass_copy_frag",
+			"files": [
+				"pass_copy.frag.d3d11"
+			],
+			"file_sizes": [
+				1
+			],
+			"type": "shader",
+			"inputs": [
+				{
+					"name": "texCoord",
+					"type": "vec2"
+				}
+			],
+			"outputs": [
+				{
+					"name": "fragColor",
+					"type": "vec4"
+				}
+			],
+			"uniforms": [
+				{
+					"name": "tex",
+					"type": "sampler2D"
+				}
+			],
+			"types": []
+		},
+		{
 			"name": "pass_vert",
 			"files": [
 				"pass.vert.d3d11"
@@ -839,7 +884,7 @@
 			],
 			"uniforms": [
 				{
-					"name": "ImageTexture_004",
+					"name": "ImageTexture_010",
 					"type": "sampler2D"
 				}
 			],
@@ -860,11 +905,11 @@
 					"type": "vec4"
 				},
 				{
-					"name": "tex",
+					"name": "nor",
 					"type": "vec2"
 				},
 				{
-					"name": "nor",
+					"name": "tex",
 					"type": "vec2"
 				},
 				{
@@ -878,22 +923,22 @@
 			],
 			"outputs": [
 				{
-					"name": "texCoord",
-					"type": "vec2"
-				},
-				{
 					"name": "wnormal",
 					"type": "vec3"
+				},
+				{
+					"name": "texCoord",
+					"type": "vec2"
 				}
 			],
 			"uniforms": [
 				{
-					"name": "texUnpack",
-					"type": "float"
-				},
-				{
 					"name": "N",
 					"type": "mat3"
+				},
+				{
+					"name": "texUnpack",
+					"type": "float"
 				},
 				{
 					"name": "WVP",
@@ -933,9 +978,19 @@
 				1
 			],
 			"type": "shader",
-			"inputs": [],
+			"inputs": [
+				{
+					"name": "texCoord",
+					"type": "vec2"
+				}
+			],
 			"outputs": [],
-			"uniforms": [],
+			"uniforms": [
+				{
+					"name": "ImageTexture_010",
+					"type": "sampler2D"
+				}
+			],
 			"types": []
 		},
 		{
@@ -953,6 +1008,10 @@
 					"type": "vec4"
 				},
 				{
+					"name": "tex",
+					"type": "vec2"
+				},
+				{
 					"name": "gl_VertexID",
 					"type": "int"
 				},
@@ -961,11 +1020,208 @@
 					"type": "int"
 				}
 			],
-			"outputs": [],
+			"outputs": [
+				{
+					"name": "texCoord",
+					"type": "vec2"
+				}
+			],
 			"uniforms": [
 				{
 					"name": "LWVP",
 					"type": "mat4"
+				},
+				{
+					"name": "texUnpack",
+					"type": "float"
+				}
+			],
+			"types": [
+				{
+					"name": "gl_PerVertex",
+					"members": [
+						{
+							"type": "vec4",
+							"name": "gl_Position"
+						},
+						{
+							"type": "float",
+							"name": "gl_PointSize"
+						},
+						{
+							"type": "float[]",
+							"name": "gl_ClipDistance"
+						},
+						{
+							"type": "float[]",
+							"name": "gl_CullDistance"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "savethenimbus_translucent_frag",
+			"files": [
+				"savethenimbus_translucent.frag.d3d11"
+			],
+			"file_sizes": [
+				1
+			],
+			"type": "shader",
+			"inputs": [
+				{
+					"name": "wnormal",
+					"type": "vec3"
+				},
+				{
+					"name": "eyeDir",
+					"type": "vec3"
+				},
+				{
+					"name": "texCoord",
+					"type": "vec2"
+				},
+				{
+					"name": "wposition",
+					"type": "vec3"
+				},
+				{
+					"name": "gl_FragCoord",
+					"type": "vec4"
+				}
+			],
+			"outputs": [
+				{
+					"name": "fragColor",
+					"type": "vec4[]"
+				}
+			],
+			"uniforms": [
+				{
+					"name": "casData",
+					"type": "vec4[]"
+				},
+				{
+					"name": "ImageTexture_010",
+					"type": "sampler2D"
+				},
+				{
+					"name": "senvmapBrdf",
+					"type": "sampler2D"
+				},
+				{
+					"name": "shirr",
+					"type": "vec4[]"
+				},
+				{
+					"name": "envmapNumMipmaps",
+					"type": "int"
+				},
+				{
+					"name": "senvmapRadiance",
+					"type": "sampler2D"
+				},
+				{
+					"name": "envmapStrength",
+					"type": "float"
+				},
+				{
+					"name": "sunDir",
+					"type": "vec3"
+				},
+				{
+					"name": "receiveShadow",
+					"type": "bool"
+				},
+				{
+					"name": "shadowMap",
+					"type": "sampler2DShadow"
+				},
+				{
+					"name": "eye",
+					"type": "vec3"
+				},
+				{
+					"name": "shadowsBias",
+					"type": "float"
+				},
+				{
+					"name": "sunCol",
+					"type": "vec3"
+				}
+			],
+			"types": []
+		},
+		{
+			"name": "savethenimbus_translucent_vert",
+			"files": [
+				"savethenimbus_translucent.vert.d3d11"
+			],
+			"file_sizes": [
+				1
+			],
+			"type": "shader",
+			"inputs": [
+				{
+					"name": "pos",
+					"type": "vec4"
+				},
+				{
+					"name": "nor",
+					"type": "vec2"
+				},
+				{
+					"name": "tex",
+					"type": "vec2"
+				},
+				{
+					"name": "gl_VertexID",
+					"type": "int"
+				},
+				{
+					"name": "gl_InstanceID",
+					"type": "int"
+				}
+			],
+			"outputs": [
+				{
+					"name": "wnormal",
+					"type": "vec3"
+				},
+				{
+					"name": "texCoord",
+					"type": "vec2"
+				},
+				{
+					"name": "wposition",
+					"type": "vec3"
+				},
+				{
+					"name": "eyeDir",
+					"type": "vec3"
+				}
+			],
+			"uniforms": [
+				{
+					"name": "N",
+					"type": "mat3"
+				},
+				{
+					"name": "texUnpack",
+					"type": "float"
+				},
+				{
+					"name": "W",
+					"type": "mat4"
+				},
+				{
+					"name": "WVP",
+					"type": "mat4"
+				},
+				{
+					"name": "eye",
+					"type": "vec3"
 				}
 			],
 			"types": [
@@ -1409,6 +1665,43 @@
 				{
 					"name": "PPComp12",
 					"type": "vec3"
+				}
+			],
+			"types": []
+		},
+		{
+			"name": "translucent_resolve_frag",
+			"files": [
+				"translucent_resolve.frag.d3d11"
+			],
+			"file_sizes": [
+				1
+			],
+			"type": "shader",
+			"inputs": [
+				{
+					"name": "texCoord",
+					"type": "vec2"
+				}
+			],
+			"outputs": [
+				{
+					"name": "fragColor",
+					"type": "vec4"
+				}
+			],
+			"uniforms": [
+				{
+					"name": "gbuffer0",
+					"type": "sampler2D"
+				},
+				{
+					"name": "texSize",
+					"type": "vec2"
+				},
+				{
+					"name": "gbuffer1",
+					"type": "sampler2D"
 				}
 			],
 			"types": []

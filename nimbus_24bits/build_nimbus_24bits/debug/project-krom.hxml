@@ -21,10 +21,10 @@
 -D rp_antialiasing=SMAA
 -D rp_supersampling=1
 -D rp_ssgi=SSAO
--D armory
--D arm_audio
+-D rp_translucency
 -D arm_noembed
 -D arm_soundcompress
+-D arm_audio
 -D arm_skin
 -D arm_particles
 -D sys_krom
@@ -46,6 +46,6 @@
 -D kha_a2
 -D kha
 -D kha_version=1810
--D kha_project_name=nimbus_24bits
+-D kha_project_name=nimbus_24bits_1_0_0
 -js krom\krom.js.temp
 -main Main

@@ -1,10 +1,10 @@
 #version 450
+in vec2 texCoord;
+uniform sampler2D ImageTexture_010;
 void main() {
-	vec3 n;
-	float dotNV;
+	vec4 ImageTexture_010_texread_store = texture(ImageTexture_010, texCoord.xy);
 	float opacity;
-	const float MixShader_fac = 0.5;
-	const float MixShader_fac_inv = 1.0 - MixShader_fac;
-	opacity = (1.0 * MixShader_fac_inv + 1.0 * MixShader_fac) - 0.0002;
-	if (opacity < 0.10000000149011612) discard;
+	float ImageTexture_010_Alpha_res = ImageTexture_010_texread_store.a;
+	opacity = ImageTexture_010_Alpha_res - 0.0002;
+	if (opacity < 1.0) discard;
 }

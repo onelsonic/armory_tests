@@ -1,7 +1,6 @@
 // Geometric Skinning with Approximate Dual Quaternion Blending, Kavan
 // Based on https://github.com/tcoppex/aer-engine/blob/master/demos/aura/data/shaders/Skinning.glsl
-uniform vec4 skinBones[245];
-//uniform vec4 skinBones[skinMaxBones * 2];
+uniform vec4 skinBones[skinMaxBones * 2];
 
 void getSkinningDualQuat(const ivec4 bone, vec4 weight, out vec4 A, inout vec4 B) {
 	// Retrieve the real and dual part of the dual-quaternions
