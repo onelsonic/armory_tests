@@ -20,8 +20,7 @@ class GamepadTester extends iron.Trait {
 		});
 
 		notifyOnUpdate(function() {
-			//trace(gamepad.buttonsFrame[0]);
-			if (gamepadnotcalibrated && (gamepad.leftStick.x!=0 && gamepad.leftStick.y!=0 && gamepad.rightStick.x!=0 && gamepad.rightStick.y!=0)) {
+			if (gamepadnotcalibrated && (gamepad.leftStick.x!=0 || gamepad.leftStick.y!=0 || gamepad.rightStick.x!=0 || gamepad.rightStick.y!=0)) {
 				inileftStickx = gamepad.leftStick.x;
 				inileftSticky = gamepad.leftStick.y;
 				inirightStickx = gamepad.rightStick.x;
@@ -55,73 +54,53 @@ class GamepadTester extends iron.Trait {
 				canvas.getElement("gamepad-r3stick").y=0;
 			}
 
-			if (gamepad.down(Gamepad.keyCode(0))>0.0) canvas.getElement("gamepad-a").color=-1;
-			if (gamepad.released(Gamepad.keyCode(0))==true) canvas.getElement("gamepad-a").color=16777215;
+			if (gamepad.down("cross")>0.0) canvas.getElement("gamepad-a").color=-1;
+			if (gamepad.released("cross")==true) canvas.getElement("gamepad-a").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(1))>0.0) canvas.getElement("gamepad-b").color=-1;
-			if (gamepad.released(Gamepad.keyCode(1))==true) canvas.getElement("gamepad-b").color=16777215;
+			if (gamepad.down("circle")>0.0) canvas.getElement("gamepad-b").color=-1;
+			if (gamepad.released("circle")==true) canvas.getElement("gamepad-b").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(2))>0.0) canvas.getElement("gamepad-x").color=-1;
-			if (gamepad.released(Gamepad.keyCode(2))==true) canvas.getElement("gamepad-x").color=16777215;
+			if (gamepad.down("square")>0.0) canvas.getElement("gamepad-x").color=-1;
+			if (gamepad.released("square")==true) canvas.getElement("gamepad-x").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(3))>0.0) canvas.getElement("gamepad-y").color=-1;
-			if (gamepad.released(Gamepad.keyCode(3))==true) canvas.getElement("gamepad-y").color=16777215;
+			if (gamepad.down("triangle")>0.0) canvas.getElement("gamepad-y").color=-1;
+			if (gamepad.released("triangle")==true) canvas.getElement("gamepad-y").color=16777215;
 
-			if (gamepad.down(Gamepad.keyCode(12))>0.0) canvas.getElement("gamepad-up").color=-1;
-			if (gamepad.released(Gamepad.keyCode(12))==true) canvas.getElement("gamepad-up").color=16777215;
+			if (gamepad.down("up")>0.0) canvas.getElement("gamepad-up").color=-1;
+			if (gamepad.released("up")==true) canvas.getElement("gamepad-up").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(13))>0.0) canvas.getElement("gamepad-down").color=-1;
-			if (gamepad.released(Gamepad.keyCode(13))==true) canvas.getElement("gamepad-down").color=16777215;
+			if (gamepad.down("down")>0.0) canvas.getElement("gamepad-down").color=-1;
+			if (gamepad.released("down")==true) canvas.getElement("gamepad-down").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(14))>0.0) canvas.getElement("gamepad-left").color=-1;
-			if (gamepad.released(Gamepad.keyCode(14))==true) canvas.getElement("gamepad-left").color=16777215;
+			if (gamepad.down("left")>0.0) canvas.getElement("gamepad-left").color=-1;
+			if (gamepad.released("left")==true) canvas.getElement("gamepad-left").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(15))>0.0) canvas.getElement("gamepad-right").color=-1;
-			if (gamepad.released(Gamepad.keyCode(15))==true) canvas.getElement("gamepad-right").color=16777215;
+			if (gamepad.down("right")>0.0) canvas.getElement("gamepad-right").color=-1;
+			if (gamepad.released("right")==true) canvas.getElement("gamepad-right").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(8))>0.0) canvas.getElement("gamepad-share").color=-1;
-			if (gamepad.released(Gamepad.keyCode(8))==true) canvas.getElement("gamepad-share").color=16777215;
+			if (gamepad.down("share")>0.0) canvas.getElement("gamepad-share").color=-1;
+			if (gamepad.released("share")==true) canvas.getElement("gamepad-share").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(9))>0.0) canvas.getElement("gamepad-option").color=-1;
-			if (gamepad.released(Gamepad.keyCode(9))==true) canvas.getElement("gamepad-option").color=16777215;
+			if (gamepad.down("options")>0.0) canvas.getElement("gamepad-option").color=-1;
+			if (gamepad.released("options")==true) canvas.getElement("gamepad-option").color=16777215;
 
-			if (gamepad.down(Gamepad.keyCode(11))>0.0) canvas.getElement("gamepad-r3").color=-1;
-			if (gamepad.released(Gamepad.keyCode(11))==true) canvas.getElement("gamepad-r3").color=16777215;
+			if (gamepad.down("r3")>0.0) canvas.getElement("gamepad-r3").color=-1;
+			if (gamepad.released("r3")==true) canvas.getElement("gamepad-r3").color=16777215;
 									
-			if (gamepad.down(Gamepad.keyCode(10))>0.0) canvas.getElement("gamepad-l3").color=-1;
-			if (gamepad.released(Gamepad.keyCode(10))==true) canvas.getElement("gamepad-l3").color=16777215;
+			if (gamepad.down("l3")>0.0) canvas.getElement("gamepad-l3").color=-1;
+			if (gamepad.released("l3")==true) canvas.getElement("gamepad-l3").color=16777215;
 			
-			if (gamepad.down(Gamepad.keyCode(5))>0.0) canvas.getElement("gamepad-r1-rb").color=-1;
-			if (gamepad.released(Gamepad.keyCode(5))==true) canvas.getElement("gamepad-r1-rb").color=16777215;
+			if (gamepad.down("r1")>0.0) canvas.getElement("gamepad-r1-rb").color=-1;
+			if (gamepad.released("r1")==true) canvas.getElement("gamepad-r1-rb").color=16777215;
 						
-			if (gamepad.down(Gamepad.keyCode(7))>0.0) canvas.getElement("gamepad-r2-rt").color=-1;
-			if (gamepad.released(Gamepad.keyCode(7))==true) canvas.getElement("gamepad-r2-rt").color=16777215;
+			if (gamepad.down("r2")>0.0) canvas.getElement("gamepad-r2-rt").color=-1;
+			if (gamepad.released("r2")==true) canvas.getElement("gamepad-r2-rt").color=16777215;
 						
-			if (gamepad.down(Gamepad.keyCode(4))>0.0) canvas.getElement("gamepad-l1-lb").color=-1;
-			if (gamepad.released(Gamepad.keyCode(4))==true) canvas.getElement("gamepad-l1-lb").color=16777215;
+			if (gamepad.down("l1")>0.0) canvas.getElement("gamepad-l1-lb").color=-1;
+			if (gamepad.released("l1")==true) canvas.getElement("gamepad-l1-lb").color=16777215;
 						
-			if (gamepad.down(Gamepad.keyCode(6))>0.0) canvas.getElement("gamepad-l2-lt").color=-1;
-			if (gamepad.released(Gamepad.keyCode(6))==true) canvas.getElement("gamepad-l2-lt").color=16777215;
-
-			if (gamepad.released(Gamepad.keyCode(0))) trace("button 0");
-			if (gamepad.released(Gamepad.keyCode(1))) trace("button 1");
-			if (gamepad.released(Gamepad.keyCode(2))) trace("button 2");
-			if (gamepad.released(Gamepad.keyCode(3))) trace("button 3");
-			if (gamepad.released(Gamepad.keyCode(4))) trace("button 4");
-			if (gamepad.released(Gamepad.keyCode(5))) trace("button 5");
-			if (gamepad.released(Gamepad.keyCode(6))) trace("button 6");
-			if (gamepad.released(Gamepad.keyCode(7))) trace("button 7");
-			if (gamepad.released(Gamepad.keyCode(8))) trace("button 8");
-			if (gamepad.released(Gamepad.keyCode(9))) trace("button 9");
-			if (gamepad.released(Gamepad.keyCode(10))) trace("button 10");
-			if (gamepad.released(Gamepad.keyCode(11))) trace("button 11");
-			if (gamepad.released(Gamepad.keyCode(12))) trace("button 12");
-			if (gamepad.released(Gamepad.keyCode(13))) trace("button 13");
-			if (gamepad.released(Gamepad.keyCode(14))) trace("button 14");
-			if (gamepad.released(Gamepad.keyCode(15))) trace("button 15");
-			if (gamepad.released(Gamepad.keyCode(16))) trace("button 16");
-			if (gamepad.released(Gamepad.keyCode(17))) trace("button 17");
-
+			if (gamepad.down("l2")>0.0) canvas.getElement("gamepad-l2-lt").color=-1;
+			if (gamepad.released("l2")==true) canvas.getElement("gamepad-l2-lt").color=16777215;
 		});
 	}
 }
