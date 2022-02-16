@@ -29,22 +29,22 @@ float packFloat2(float f1, float f2)
 void frag_main()
 {
     float3 n = normalize(wnormal);
-    float3 basecol = float3(0.80000007152557373046875f, 0.024060077965259552001953125f, 0.000832095858640968799591064453125f);
+    float3 basecol = float3(0.0f, 0.265817463397979736328125f, 0.80000007152557373046875f);
     float roughness = 0.5f;
     float metallic = 0.0f;
     float occlusion = 1.0f;
     float specular = 0.5f;
     n /= ((abs(n.x) + abs(n.y)) + abs(n.z)).xxx;
-    float2 _96;
+    float2 _95;
     if (n.z >= 0.0f)
     {
-        _96 = n.xy;
+        _95 = n.xy;
     }
     else
     {
-        _96 = octahedronWrap(n.xy);
+        _95 = octahedronWrap(n.xy);
     }
-    n = float3(_96.x, _96.y, n.z);
+    n = float3(_95.x, _95.y, n.z);
     fragColor[0] = float4(n.xy, roughness, packFloatInt16(metallic, 0u));
     fragColor[1] = float4(basecol, packFloat2(occlusion, specular));
 }

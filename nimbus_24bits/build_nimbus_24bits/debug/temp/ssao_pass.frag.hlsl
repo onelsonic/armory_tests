@@ -7,8 +7,6 @@ uniform float2 cameraProj;
 uniform float2 screenSize;
 uniform float3 eye;
 uniform float4x4 invVP;
-uniform float3 PPComp11;
-uniform float3 PPComp12;
 
 static float2 texCoord;
 static float fragColor;

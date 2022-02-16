@@ -12,17 +12,17 @@
 		<movie minorVersion="0" />
 		<movie platform="JavaScript" />
 		<movie background="#ffffff" />
-		<movie preferredSDK="..\..\..\..\..\..\..\..\armorylatest\armorySDKlastest\Kha\Tools\haxe" />
+		<movie preferredSDK="..\..\..\..\..\..\..\..\ArmorySDK2202\Kha\Tools\haxe" />
 	</output>
 	<!-- Other classes to be compiled into your SWF -->
 	<classpaths>
-		<class path="..\..\..\..\..\..\..\..\armorylatest\armorySDKlastest\Kha\Sources" />
-		<class path="..\..\..\..\..\..\..\..\armorylatest\armorySDKlastest\Kha\Backends\Krom" />
+		<class path="..\..\..\..\..\..\..\..\ArmorySDK2202\Kha\Sources" />
+		<class path="..\..\..\..\..\..\..\..\ArmorySDK2202\Kha\Backends\Krom" />
 		<class path="..\..\Sources" />
-		<class path="..\..\..\..\..\..\..\..\armorylatest\armorySDKlastest\armory\Sources" />
-		<class path="..\..\..\..\..\..\..\..\armorylatest\armorySDKlastest\iron\Sources" />
-		<class path="..\..\..\..\..\..\..\..\armorylatest\armorySDKlastest\armory" />
-		<class path="..\..\..\..\..\..\..\..\armorylatest\armorySDKlastest\iron" />
+		<class path="..\..\..\..\..\..\..\..\ArmorySDK2202\armory\Sources" />
+		<class path="..\..\..\..\..\..\..\..\ArmorySDK2202\iron\Sources" />
+		<class path="..\..\..\..\..\..\..\..\ArmorySDK2202\armory" />
+		<class path="..\..\..\..\..\..\..\..\ArmorySDK2202\iron" />
 	</classpaths>
 	<!-- Build options -->
 	<build>
@@ -31,7 +31,7 @@
 		<option noInlineOnDebug="False" />
 		<option mainClass="Main" />
 		<option enabledebug="False" />
-		<option additional="-D hxcpp_smart_strings&#xA;-D C:/armorylatest/armorySDKlastest/armory&#xA;-D C:/armorylatest/armorySDKlastest/iron&#xA;-D arm_deferred&#xA;-D arm_csm&#xA;-D rp_hdr&#xA;-D rp_renderer=Deferred&#xA;-D rp_shadowmap&#xA;-D rp_shadowmap_cascade=1024&#xA;-D rp_shadowmap_cube=512&#xA;-D rp_background=World&#xA;-D rp_render_to_texture&#xA;-D rp_compositornodes&#xA;-D rp_antialiasing=SMAA&#xA;-D rp_supersampling=1&#xA;-D rp_ssgi=SSAO&#xA;-D rp_translucency&#xA;-D arm_noembed&#xA;-D arm_soundcompress&#xA;-D arm_audio&#xA;-D arm_skin&#xA;-D arm_particles&#xA;-D sys_krom&#xA;-D sys_g1&#xA;-D sys_g2&#xA;-D sys_g3&#xA;-D sys_g4&#xA;-D sys_a1&#xA;-D sys_a2&#xA;-D kha_js&#xA;-D kha_krom&#xA;-D kha_krom_js&#xA;-D kha_direct3d11&#xA;-D kha_g1&#xA;-D kha_g2&#xA;-D kha_g3&#xA;-D kha_g4&#xA;-D kha_a1&#xA;-D kha_a2&#xA;-D kha&#xA;-D kha_version=1810&#xA;-D kha_project_name=nimbus_24bits_1_0_0&#xA;-D kha_output=&quot;C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\nimbus_24bits\build_nimbus_24bits\debug\krom\krom.js.temp&quot;&#xA;" />
+		<option additional="-D hxcpp_smart_strings&#xA;-D C:/ArmorySDK2202/armory&#xA;-D C:/ArmorySDK2202/iron&#xA;-D arm_deferred&#xA;-D arm_csm&#xA;-D rp_hdr&#xA;-D rp_renderer=Deferred&#xA;-D rp_shadowmap&#xA;-D rp_shadowmap_cascade=1024&#xA;-D rp_shadowmap_cube=512&#xA;-D rp_background=World&#xA;-D rp_render_to_texture&#xA;-D rp_compositornodes&#xA;-D rp_antialiasing=SMAA&#xA;-D rp_supersampling=1&#xA;-D rp_ssgi=SSAO&#xA;-D rp_translucency&#xA;-D js-es=6&#xA;-D arm_assert_level=Warning&#xA;-D arm_noembed&#xA;-D arm_soundcompress&#xA;-D arm_audio&#xA;-D arm_skin&#xA;-D arm_morph_target&#xA;-D arm_particles&#xA;-D armory&#xA;-D sys_krom&#xA;-D sys_g1&#xA;-D sys_g2&#xA;-D sys_g3&#xA;-D sys_g4&#xA;-D sys_a1&#xA;-D sys_a2&#xA;-D kha_js&#xA;-D kha_krom&#xA;-D kha_krom_js&#xA;-D kha_direct3d11&#xA;-D kha_g1&#xA;-D kha_g2&#xA;-D kha_g3&#xA;-D kha_g4&#xA;-D kha_a1&#xA;-D kha_a2&#xA;-D kha&#xA;-D kha_version=1810&#xA;-D kha_project_name=nimbus_24bits_1_0_0&#xA;-D kha_output=&quot;C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\nimbus_24bits\build_nimbus_24bits\debug\krom\krom.js.temp&quot;&#xA;armory.trait.internal.UniformsManager&#xA;--macro keep(&apos;armory.trait.internal.UniformsManager&apos;)&#xA;" />
 	</build>
 	<!-- haxelib libraries -->
 	<haxelib>

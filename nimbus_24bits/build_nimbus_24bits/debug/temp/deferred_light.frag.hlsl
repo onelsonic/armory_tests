@@ -8,20 +8,18 @@ SamplerState _gbufferD_sampler : register(s2);
 uniform float3 eye;
 uniform float3 eyeLook;
 uniform float2 cameraProj;
-Texture2D<float4> gbuffer2 : register(t3);
-SamplerState _gbuffer2_sampler : register(s3);
-Texture2D<float4> senvmapBrdf : register(t4);
-SamplerState _senvmapBrdf_sampler : register(s4);
+Texture2D<float4> senvmapBrdf : register(t3);
+SamplerState _senvmapBrdf_sampler : register(s3);
 uniform float4 shirr[7];
 uniform int envmapNumMipmaps;
-Texture2D<float4> senvmapRadiance : register(t5);
-SamplerState _senvmapRadiance_sampler : register(s5);
+Texture2D<float4> senvmapRadiance : register(t4);
+SamplerState _senvmapRadiance_sampler : register(s4);
 uniform float envmapStrength;
-Texture2D<float4> ssaotex : register(t6);
-SamplerState _ssaotex_sampler : register(s6);
+Texture2D<float4> ssaotex : register(t5);
+SamplerState _ssaotex_sampler : register(s5);
 uniform float3 sunDir;
-Texture2D<float4> shadowMap : register(t7);
-SamplerComparisonState _shadowMap_sampler : register(s7);
+Texture2D<float4> shadowMap : register(t6);
+SamplerComparisonState _shadowMap_sampler : register(s6);
 uniform float shadowsBias;
 uniform float3 sunCol;
 
@@ -236,17 +234,8 @@ void frag_main()
     float3 p = getPos(eye, eyeLook, normalize(viewRay), depth, cameraProj);
     float3 v = normalize(eye - p);
     float dotNV = max(dot(n, v), 0.0f);
-    float4 g2 = gbuffer2.SampleLevel(_gbuffer2_sampler, texCoord, 0.0f);
     float2 envBRDF = senvmapBrdf.SampleLevel(_senvmapBrdf_sampler, float2(roughness, 1.0f - dotNV), 0.0f).xy;
     float3 envl = shIrradiance(n, shirr);
-    if (g2.z < 0.5f)
-    {
-        envl = envl;
-    }
-    else
-    {
-        envl = 1.0f.xxx;
-    }
     float3 reflectionWorld = reflect(-v, n);
     float lod = getMipFromRoughness(roughness, float(envmapNumMipmaps));
     float3 prefilteredColor = senvmapRadiance.SampleLevel(_senvmapRadiance_sampler, envMapEquirect(reflectionWorld), lod).xyz;
@@ -254,8 +243,8 @@ void frag_main()
     envl += (((prefilteredColor * ((f0 * envBRDF.x) + envBRDF.y.xxx)) * 1.5f) * occspec.y);
     envl *= (envmapStrength * occspec.x);
     fragColor = float4(envl.x, envl.y, envl.z, fragColor.w);
-    float3 _903 = fragColor.xyz * ssaotex.SampleLevel(_ssaotex_sampler, texCoord, 0.0f).x;
-    fragColor = float4(_903.x, _903.y, _903.z, fragColor.w);
+    float3 _890 = fragColor.xyz * ssaotex.SampleLevel(_ssaotex_sampler, texCoord, 0.0f).x;
+    fragColor = float4(_890.x, _890.y, _890.z, fragColor.w);
     float3 sh = normalize(v + sunDir);
     float sdotNH = dot(n, sh);
     float sdotVH = dot(v, sh);
@@ -263,8 +252,8 @@ void frag_main()
     float svisibility = 1.0f;
     float3 sdirect = lambertDiffuseBRDF(albedo, sdotNL) + (specularBRDF(f0, roughness, sdotNL, sdotNH, dotNV, sdotVH) * occspec.y);
     svisibility = shadowTestCascade(shadowMap, _shadowMap_sampler, eye, p + ((n * shadowsBias) * 10.0f), shadowsBias);
-    float3 _960 = fragColor.xyz + ((sdirect * svisibility) * sunCol);
-    fragColor = float4(_960.x, _960.y, _960.z, fragColor.w);
+    float3 _947 = fragColor.xyz + ((sdirect * svisibility) * sunCol);
+    fragColor = float4(_947.x, _947.y, _947.z, fragColor.w);
     fragColor.w = 1.0f;
 }
 

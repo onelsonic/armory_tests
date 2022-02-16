@@ -421,10 +421,6 @@
 					"type": "vec2"
 				},
 				{
-					"name": "gbuffer2",
-					"type": "sampler2D"
-				},
-				{
 					"name": "senvmapBrdf",
 					"type": "sampler2D"
 				},
@@ -602,7 +598,7 @@
 					"type": "vec3"
 				},
 				{
-					"name": "texPosition",
+					"name": "vertexUV",
 					"type": "vec2"
 				},
 				{
@@ -706,7 +702,7 @@
 					"type": "vec3"
 				},
 				{
-					"name": "texPosition",
+					"name": "vertexUV",
 					"type": "vec2"
 				},
 				{
@@ -810,7 +806,7 @@
 					"type": "vec3"
 				},
 				{
-					"name": "texPosition",
+					"name": "vertexUV",
 					"type": "vec2"
 				},
 				{
@@ -1102,97 +1098,6 @@
 				{
 					"name": "WVP",
 					"type": "mat4"
-				}
-			],
-			"types": [
-				{
-					"name": "gl_PerVertex",
-					"members": [
-						{
-							"type": "vec4",
-							"name": "gl_Position"
-						},
-						{
-							"type": "float",
-							"name": "gl_PointSize"
-						},
-						{
-							"type": "float[]",
-							"name": "gl_ClipDistance"
-						},
-						{
-							"type": "float[]",
-							"name": "gl_CullDistance"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "savethenimbus_shadowmap_frag",
-			"files": [
-				"savethenimbus_shadowmap.frag.d3d11"
-			],
-			"file_sizes": [
-				1
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "texCoord",
-					"type": "vec2"
-				}
-			],
-			"outputs": [],
-			"uniforms": [
-				{
-					"name": "ImageTexture_010",
-					"type": "sampler2D"
-				}
-			],
-			"types": []
-		},
-		{
-			"name": "savethenimbus_shadowmap_vert",
-			"files": [
-				"savethenimbus_shadowmap.vert.d3d11"
-			],
-			"file_sizes": [
-				1
-			],
-			"type": "shader",
-			"inputs": [
-				{
-					"name": "pos",
-					"type": "vec4"
-				},
-				{
-					"name": "tex",
-					"type": "vec2"
-				},
-				{
-					"name": "gl_VertexID",
-					"type": "int"
-				},
-				{
-					"name": "gl_InstanceID",
-					"type": "int"
-				}
-			],
-			"outputs": [
-				{
-					"name": "texCoord",
-					"type": "vec2"
-				}
-			],
-			"uniforms": [
-				{
-					"name": "LWVP",
-					"type": "mat4"
-				},
-				{
-					"name": "texUnpack",
-					"type": "float"
 				}
 			],
 			"types": [
@@ -1816,14 +1721,6 @@
 				{
 					"name": "invVP",
 					"type": "mat4"
-				},
-				{
-					"name": "PPComp11",
-					"type": "vec3"
-				},
-				{
-					"name": "PPComp12",
-					"type": "vec3"
 				}
 			],
 			"types": []

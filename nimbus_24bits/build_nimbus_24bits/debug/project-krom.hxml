@@ -1,13 +1,13 @@
--cp C:\armorylatest\armorySDKlastest\Kha\Sources
--cp C:\armorylatest\armorySDKlastest\Kha\Backends\Krom
+-cp C:\ArmorySDK2202\Kha\Sources
+-cp C:\ArmorySDK2202\Kha\Backends\Krom
 -cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\nimbus_24bits\Sources
--cp C:\armorylatest\armorySDKlastest\armory\Sources
--cp C:\armorylatest\armorySDKlastest\iron\Sources
--cp C:/armorylatest/armorySDKlastest/armory
--cp C:/armorylatest/armorySDKlastest/iron
+-cp C:\ArmorySDK2202\armory\Sources
+-cp C:\ArmorySDK2202\iron\Sources
+-cp C:/ArmorySDK2202/armory
+-cp C:/ArmorySDK2202/iron
 -D hxcpp_smart_strings
--D C:/armorylatest/armorySDKlastest/armory
--D C:/armorylatest/armorySDKlastest/iron
+-D C:/ArmorySDK2202/armory
+-D C:/ArmorySDK2202/iron
 -D arm_deferred
 -D arm_csm
 -D rp_hdr
@@ -22,11 +22,15 @@
 -D rp_supersampling=1
 -D rp_ssgi=SSAO
 -D rp_translucency
+-D js-es=6
+-D arm_assert_level=Warning
 -D arm_noembed
 -D arm_soundcompress
 -D arm_audio
 -D arm_skin
+-D arm_morph_target
 -D arm_particles
+-D armory
 -D sys_krom
 -D sys_g1
 -D sys_g2
@@ -48,4 +52,6 @@
 -D kha_version=1810
 -D kha_project_name=nimbus_24bits_1_0_0
 -js krom\krom.js.temp
+armory.trait.internal.UniformsManager
+--macro keep('armory.trait.internal.UniformsManager')
 -main Main
