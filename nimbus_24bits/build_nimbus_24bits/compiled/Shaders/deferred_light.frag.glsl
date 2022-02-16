@@ -21,9 +21,7 @@
 uniform sampler2D gbufferD;
 uniform sampler2D gbuffer0;
 uniform sampler2D gbuffer1;
-#ifdef _gbuffer2
 uniform sampler2D gbuffer2;
-#endif
 
 #ifdef _VoxelAOvar
 uniform sampler3D voxels;
@@ -208,9 +206,7 @@ void main() {
 	vec3 v = normalize(eye - p);
 	float dotNV = max(dot(n, v), 0.0);
 
-#ifdef _gbuffer2
 	vec4 g2 = textureLod(gbuffer2, texCoord, 0.0);
-#endif
 
 #ifdef _MicroShadowing
 	occspec.x = mix(1.0, occspec.x, dotNV); // AO Fresnel
@@ -225,16 +221,14 @@ void main() {
 
 	vec3 envl = shIrradiance(n, shirr);
 
-	#ifdef _gbuffer2
-		if (g2.b < 0.5) {
-			envl = envl;
-		} else {
-			envl = vec3(1.0);
-		}
-	#endif
+	if (g2.b < 0.5) {
+		envl = envl;
+	} else {
+		envl = vec3(1.0);
+	}
 
 	#ifdef _EnvTex
-		envl /= PI;
+	envl /= PI;
 	#endif
 #else
 	vec3 envl = vec3(1.0);

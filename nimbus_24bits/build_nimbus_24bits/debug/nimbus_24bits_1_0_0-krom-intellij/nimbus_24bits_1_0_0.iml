@@ -15,18 +15,18 @@
     <output url="file://$MODULE_DIR$/../krom" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../..">
-      <sourceFolder url="file://C:\ArmorySDK2202\Kha\Sources" isTestSource="false" />
-      <sourceFolder url="file://C:\ArmorySDK2202\Kha\Backends\Krom" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\Kha\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\Kha\Backends\Krom" isTestSource="false" />
       <sourceFolder url="file://C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\nimbus_24bits\Sources" isTestSource="false" />
-      <sourceFolder url="file://C:\ArmorySDK2202\armory\Sources" isTestSource="false" />
-      <sourceFolder url="file://C:\ArmorySDK2202\iron\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\armory\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\armorylatest\armorySDKlastest\iron\Sources" isTestSource="false" />
 
     </content>
-    <content url="file://C:/ArmorySDK2202/armory">
-      <sourceFolder url="file://C:/ArmorySDK2202/armory" isTestSource="false" />
+    <content url="file://C:/armorylatest/armorySDKlastest/armory">
+      <sourceFolder url="file://C:/armorylatest/armorySDKlastest/armory" isTestSource="false" />
     </content>
-    <content url="file://C:/ArmorySDK2202/iron">
-      <sourceFolder url="file://C:/ArmorySDK2202/iron" isTestSource="false" />
+    <content url="file://C:/armorylatest/armorySDKlastest/iron">
+      <sourceFolder url="file://C:/armorylatest/armorySDKlastest/iron" isTestSource="false" />
     </content>
     
     <orderEntry type="jdk" jdkName="Haxe 3.2.0" jdkType="Haxe toolkit" />
