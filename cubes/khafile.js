@@ -1,15 +1,15 @@
 // Auto-generated
-let project = new Project('june06cube_1_0_0');
+let project = new Project('aug08cube_1_0_0');
 
 project.addSources('Sources');
-project.addLibrary("C:/ArmorySDK2206/armory");
-project.addLibrary("C:/ArmorySDK2206/iron");
+project.addLibrary("C:/ArmorySDK2208_latest/ArmorySDK2208/armory");
+project.addLibrary("C:/ArmorySDK2208_latest/ArmorySDK2208/iron");
 project.addParameter('-dce full');
 project.addParameter('armory.trait.internal.UniformsManager');
 project.addParameter("--macro keep('armory.trait.internal.UniformsManager')");
-project.addShaders("build_june06cube/compiled/Shaders/*.glsl", { noembed: false});
-project.addAssets("build_june06cube/compiled/Assets/**", { notinlist: true });
-project.addAssets("build_june06cube/compiled/Shaders/*.arm", { notinlist: true });
+project.addShaders("build_aug08cube/compiled/Shaders/*.glsl", { noembed: false});
+project.addAssets("build_aug08cube/compiled/Assets/**", { notinlist: true });
+project.addAssets("build_aug08cube/compiled/Shaders/*.arm", { notinlist: true });
 project.addDefine('rp_renderer=Forward');
 project.addDefine('rp_shadowmap');
 project.addDefine('rp_shadowmap_cascade=1024');

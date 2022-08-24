@@ -1,7 +1,7 @@
 // Auto-generated
 package ;
 class Main {
-    public static inline var projectName = 'june06cube';
+    public static inline var projectName = 'aug08cube';
     public static inline var projectVersion = '1.0.0';
     public static inline var projectPackage = 'arm';
     public static inline var resolutionSize = 430;

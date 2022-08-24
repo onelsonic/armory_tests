@@ -15,18 +15,18 @@
     <output url="file://$MODULE_DIR$/../html5" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../..">
-      <sourceFolder url="file://C:\ArmorySDK2206\Kha\Sources" isTestSource="false" />
-      <sourceFolder url="file://C:\ArmorySDK2206\Kha\Backends\HTML5" isTestSource="false" />
+      <sourceFolder url="file://C:\ArmorySDK2208_latest\ArmorySDK2208\Kha\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\ArmorySDK2208_latest\ArmorySDK2208\Kha\Backends\HTML5" isTestSource="false" />
       <sourceFolder url="file://C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\cubes\Sources" isTestSource="false" />
-      <sourceFolder url="file://C:\ArmorySDK2206\armory\Sources" isTestSource="false" />
-      <sourceFolder url="file://C:\ArmorySDK2206\iron\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\ArmorySDK2208_latest\ArmorySDK2208\armory\Sources" isTestSource="false" />
+      <sourceFolder url="file://C:\ArmorySDK2208_latest\ArmorySDK2208\iron\Sources" isTestSource="false" />
 
     </content>
-    <content url="file://C:/ArmorySDK2206/armory">
-      <sourceFolder url="file://C:/ArmorySDK2206/armory" isTestSource="false" />
+    <content url="file://C:/ArmorySDK2208_latest/ArmorySDK2208/armory">
+      <sourceFolder url="file://C:/ArmorySDK2208_latest/ArmorySDK2208/armory" isTestSource="false" />
     </content>
-    <content url="file://C:/ArmorySDK2206/iron">
-      <sourceFolder url="file://C:/ArmorySDK2206/iron" isTestSource="false" />
+    <content url="file://C:/ArmorySDK2208_latest/ArmorySDK2208/iron">
+      <sourceFolder url="file://C:/ArmorySDK2208_latest/ArmorySDK2208/iron" isTestSource="false" />
     </content>
     
     <orderEntry type="jdk" jdkName="Haxe 3.2.0" jdkType="Haxe toolkit" />
