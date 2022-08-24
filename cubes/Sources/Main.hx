@@ -1,8 +1,8 @@
 // Auto-generated
 package ;
 class Main {
-    public static inline var projectName = 'june08cube';
-    public static inline var projectVersion = '1.0.1';
+    public static inline var projectName = 'june06cube';
+    public static inline var projectVersion = '1.0.0';
     public static inline var projectPackage = 'arm';
     public static inline var resolutionSize = 430;
     public static function main() {
@@ -12,9 +12,9 @@ class Main {
         armory.system.Starter.main(
             'Scene',
             0,
-            false,
             true,
-            false,
+            true,
+            true,
             800,
             600,
             1,

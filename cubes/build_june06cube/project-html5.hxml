@@ -1,6 +1,6 @@
 -cp C:\ArmorySDK2206\Kha\Sources
 -cp C:\ArmorySDK2206\Kha\Backends\HTML5
--cp C:\Users\devWin10\Desktop\june06cube\Sources
+-cp C:\Users\devWin10\Desktop\GITHUB\GITHUB_armory_tests\cubes\Sources
 -cp C:\ArmorySDK2206\armory\Sources
 -cp C:\ArmorySDK2206\iron\Sources
 -cp C:/ArmorySDK2206/armory
@@ -48,7 +48,7 @@
 -D kha_html5_js
 -D kha
 -D kha_version=1810
--D kha_project_name=june06cube_1_0_2
+-D kha_project_name=june06cube_1_0_0
 -js html5\kha.js
 -dce full
 armory.trait.internal.UniformsManager
